@@ -19,4 +19,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+Route::view('client-dashboard', 'client-view.dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
 require __DIR__.'/auth.php';
