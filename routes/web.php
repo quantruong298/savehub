@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Livewire\Bookmark\Index;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,8 +20,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
-Route::view('client-dashboard', 'client-view.dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/client-dashboard', Index::class)->name('client.dashboard');
+});
 
 require __DIR__.'/auth.php';

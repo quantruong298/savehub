@@ -86,6 +86,8 @@
         <flux:text class="mb-6 mt-2 text-base">Check what you have saved</flux:text>
 
         <flux:separator variant="subtle" />
+
+        {{ $slot }} {{-- This is where your Livewire content goes --}}
     </flux:main>
 
     @fluxScripts
