@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <!-- ... -->
-    @include('partials.head')
-    @fluxAppearance
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{ $title ?? config('app.name') }}</title>
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @fluxAppearance --}}
 </head>
 <body class="min-h-screen bg-white dark:bg-zinc-800">
     <flux:sidebar sticky stashable class="bg-zinc-50 dark:bg-zinc-900 border-r rtl:border-r-0 rtl:border-l border-zinc-200 dark:border-zinc-700">
@@ -15,7 +26,7 @@
         <flux:input as="button" variant="filled" placeholder="Search..." icon="magnifying-glass" />
 
         <flux:navlist variant="outline">
-            <flux:navlist.item icon="home" href="#" current>Home</flux:navlist.item>
+            <flux:navlist.item icon="home" href="#" current>Your Bookmarks</flux:navlist.item>
             <flux:navlist.item icon="inbox" badge="12" href="#">Inbox</flux:navlist.item>
             <flux:navlist.item icon="document-text" href="#">Documents</flux:navlist.item>
             <flux:navlist.item icon="calendar" href="#">Calendar</flux:navlist.item>
@@ -86,6 +97,8 @@
         <flux:text class="mb-6 mt-2 text-base">Check what you have saved</flux:text>
 
         <flux:separator variant="subtle" />
+
+        {{ $slot }} {{-- This is where your Livewire content goes --}}
     </flux:main>
 
     @fluxScripts
