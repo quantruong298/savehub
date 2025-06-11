@@ -5,18 +5,19 @@ namespace App\Livewire\BookMark;
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
+
 
 class Index extends Component
 {
-    public $bookmarks;
+    use WithPagination;
 
-    public function mount()
-    {
-        $this->bookmarks = Bookmark::where('user_id', Auth::id())->get();
-    }
 
     public function render()
     {
-        return view('livewire.book-mark.index')->layout('client-view.layouts.dashboard');
+        $bookmarks = Bookmark::where('user_id', Auth::id())->paginate(10);
+        return view('livewire.book-mark.index', [
+            'bookmarks' => $bookmarks,
+        ])->layout('client-view.layouts.dashboard');
     }
 }
