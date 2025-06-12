@@ -43,6 +43,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.book-mark.edit');
+        return view('livewire.bookmark.edit');
     }
 }

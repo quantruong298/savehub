@@ -2,7 +2,7 @@
 <div class="p-6">
     <div class="flex items-center justify-between mb-4">
         <h1 class="text-2xl font-bold">Bookmarks</h1>
-        <livewire:book-mark.add />
+        <livewire:bookmark.add />
         @if (session('success'))
             <div 
                 x-data="{ show: true }" 
@@ -39,8 +39,8 @@
                         <td class="px-4 py-2 text-sm text-gray-700">{{ $bookmark->description }}</td>
                         <td class="px-4 py-2 text-sm text-gray-500">{{ $bookmark->created_at }}</td>
                         <td class="px-4 py-2 text-sm">
-                            <livewire:book-mark.edit :bookmark="$bookmark" :key="$bookmark->id" />
-                            <livewire:book-mark.delete :bookmark="$bookmark" :key="$bookmark->id" />
+                            <livewire:bookmark.edit :bookmark="$bookmark" :key="$bookmark->id" />
+                            <livewire:bookmark.delete :bookmark="$bookmark" :key="$bookmark->id" />
                         </td>
                     </tr>
                 @endforeach

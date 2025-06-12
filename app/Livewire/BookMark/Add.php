@@ -39,6 +39,6 @@ class Add extends Component
 
     public function render()
     {
-        return view('livewire.book-mark.add');
+        return view('livewire.bookmark.add');
     }
 }

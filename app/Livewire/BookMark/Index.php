@@ -16,7 +16,7 @@ class Index extends Component
     public function render()
     {
         $bookmarks = Bookmark::where('user_id', Auth::id())->paginate(10);
-        return view('livewire.book-mark.index', [
+        return view('livewire.bookmark.index', [
             'bookmarks' => $bookmarks,
         ])->layout('client-view.layouts.dashboard');
     }
