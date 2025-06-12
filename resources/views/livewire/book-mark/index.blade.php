@@ -40,6 +40,7 @@
                         <td class="px-4 py-2 text-sm text-gray-500">{{ $bookmark->created_at }}</td>
                         <td class="px-4 py-2 text-sm">
                             <livewire:book-mark.edit :bookmark="$bookmark" :key="$bookmark->id" />
+                            <livewire:book-mark.delete :bookmark="$bookmark" :key="$bookmark->id" />
                         </td>
                     </tr>
                 @endforeach
