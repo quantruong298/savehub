@@ -11,6 +11,12 @@ class Edit extends Component
     public $url;
     public $description;
 
+    protected $rules = [
+        'title' => 'required|string|max:255',
+        'url' => 'required|url|max:255',
+        'description' => 'nullable|string',
+    ];
+
     public function mount(Bookmark $bookmark)
     {
         $this->bookmark = $bookmark;
@@ -19,6 +25,21 @@ class Edit extends Component
         $this->description = $bookmark->description;
     }
 
+    public function update()
+    {
+        $this->validate();
+
+        $this->bookmark->update([
+            'title' => $this->title,
+            'url' => $this->url,
+            'description' => $this->description,
+        ]);
+
+        session()->flash('success', 'Bookmark updated successfully!');
+        $this->dispatch('close-modal', name: 'edit-bookmark-' . $this->bookmark->id);
+        $this->dispatch('bookmark-updated');
+        $this->redirect(request()->header('Referer') ?? route('client.dashboard'), navigate: true);
+    }
 
     public function render()
     {
