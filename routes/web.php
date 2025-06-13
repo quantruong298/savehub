@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
-use App\Livewire\BookMark\Index;
+use App\Livewire\Bookmark\Index;
 
 Route::get('/', function () {
     return view('welcome');
