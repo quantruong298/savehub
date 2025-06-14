@@ -18,8 +18,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body
-    class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+<body>
     <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div class="container mx-auto px-4 py-16">
         <!-- Hero Section -->
@@ -46,13 +45,13 @@
         <!-- Action Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
             <a 
-            href="/login"
+            href="{{ route('login') }}"
             class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
             >
             Login to Your Account
             </a>
             <a 
-            href="/register"
+            href="{{ route('register') }}"
             class="w-full sm:w-auto px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl border-2 border-blue-600 hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
             >
             Create New Account
@@ -184,13 +183,13 @@
             <p class="text-xl mb-8 opacity-90">Join thousands of users who have already transformed their digital life</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a 
-                href="/register"
+                href="{{ route('login') }}"
                 class="w-full sm:w-auto px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
             >
                 Start Free Today
             </a>
             <a 
-                href="/login"
+                href="{{ route('login') }}"
                 class="w-full sm:w-auto px-8 py-4 bg-transparent text-white font-semibold rounded-xl border-2 border-white hover:bg-white hover:text-blue-600 transition-all duration-200 text-center"
             >
                 Already Have Account?
