@@ -9,8 +9,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+    return view('auth.login'); // Trang này chứa <livewire:auth.login-form />
+})->middleware('guest')->name('login');
 
 
 Route::get('/register', function () {
