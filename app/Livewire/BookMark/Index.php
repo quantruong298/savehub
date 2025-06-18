@@ -18,6 +18,6 @@ class Index extends Component
         $bookmarks = Bookmark::where('user_id', Auth::id())->paginate(10);
         return view('livewire.bookmark.index', [
             'bookmarks' => $bookmarks,
-        ])->layout('client-view.layouts.dashboard');
+        ])->layout('layouts.dashboard');
     }
 }

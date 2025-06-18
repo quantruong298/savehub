@@ -17,11 +17,13 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', Index::class)->name('dashboard');
+});
 
-
-Route::view('dashboard', 'layouts.dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::view('dashboard', 'layouts.dashboard')
+//     ->middleware(['auth', 'verified'])
+//     ->name('dashboard');
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::redirect('settings', 'settings/profile');

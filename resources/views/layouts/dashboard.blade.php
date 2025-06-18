@@ -249,7 +249,7 @@
 
                     {{-- Bookmarks Display --}}
                     {{-- Render Bookmark Grid --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div
                             class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
                             <div class="p-6">
@@ -301,8 +301,8 @@
                             </div>
                         </div>
 
-                    </div>
-
+                    </div> --}}
+                    {{ $slot }}
                     {{-- Render Bookmark List --}}
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="display: none;">
                         <div class="p-6 border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
