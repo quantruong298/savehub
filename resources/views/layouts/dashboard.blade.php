@@ -350,9 +350,38 @@
 
                     </div>
 
-                    {{-- Pagination --}}
+                    {{-- Pagination
                     <div class="mt-8 flex justify-center">
-                    </div>
+                        <nav class="flex items-center space-x-2" aria-label="Pagination">
+                            <!-- Previous -->
+                            <a href="#" class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                Previous
+                            </a>
+                    
+                            <!-- Page 1 (active) -->
+                            <a href="#"
+                                class="inline-flex items-center px-3 py-1.5 text-sm font-medium border border-gray-300 rounded-md bg-white text-black font-semibold">
+                                1
+                            </a>
+                    
+                            <!-- Page 2 -->
+                            <a href="#"
+                                class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md">
+                                2
+                            </a>
+                    
+                            <!-- Next -->
+                            <a href="#" class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
+                                Next
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </nav>
+                    </div> --}}
                 </div>
             </main>
         </div>
