@@ -388,14 +388,102 @@
             </main>
         </div>
 
-        <!-- Add Bookmark Button (Fixed Position) -->
-        <button
-            class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-40">
-            <!-- Plus icon -->
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-            </svg>
-        </button>
+        <div x-data="{ open: false }">
+            <!-- Floating Action Button -->
+            <button @click="open = true"
+                class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+            </button>
+
+            <!-- Modal Overlay -->
+            <div x-show="open" x-transition
+                class="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex justify-center items-center">
+                <!-- Modal Content -->
+                <div @click.away="open = false"
+                    class="bg-white rounded-lg shadow-lg w-full max-w-md max-h-[90vh] overflow-y-auto p-6">
+
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-900">Add Bookmark</h2>
+                        <button @click="open = false"
+                            class="text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
+                    </div>
+
+                    <!-- Form -->
+                    <form class="space-y-4">
+                        <!-- Title -->
+                        <div>
+                            <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                            <input type="text" id="title" placeholder="Enter bookmark title"
+                                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+                        </div>
+
+                        <!-- URL -->
+                        <div>
+                            <label for="url" class="block text-sm font-medium text-gray-700 mb-1">URL</label>
+                            <input type="url" id="url" placeholder="https://example.com"
+                                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+                        </div>
+
+                        <!-- Description -->
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                            <textarea id="description" rows="3" placeholder="Brief description of the bookmark"
+                                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"></textarea>
+                        </div>
+
+                        <!-- Tags -->
+                        <div>
+                            <label for="tags" class="block text-sm font-medium text-gray-700 mb-1">Tags</label>
+                            <input type="text" id="tags" placeholder="Enter tags separated by commas"
+                                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-500">
+                        </div>
+
+                        <!-- Folder Dropdown -->
+                        <div x-data="{ open: false, selected: '', options: ['Work', 'Personal', 'Resources', 'Reading List', 'Inspiration'] }"
+                            class="relative">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Folder (Optional)</label>
+
+                            <!-- Trigger -->
+                            <button @click="open = !open" type="button"
+                                class="w-full flex justify-between items-center border rounded-md px-3 py-2 bg-white focus:outline-none focus:ring focus:border-blue-500">
+                                <span x-text="selected || 'Select a folder'"
+                                    class="text-left text-gray-700 truncate w-full"></span>
+                                <svg class="w-5 h-5 text-gray-400 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown List -->
+                            <div x-show="open" @click.away="open = false" x-transition
+                                class="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-md shadow-lg overflow-hidden">
+                                <template x-for="option in options" :key="option">
+                                    <div @click="selected = option; open = false"
+                                        class="cursor-pointer px-4 py-2 hover:bg-gray-100 text-gray-700" x-text="option">
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+
+                        <!-- Footer Buttons -->
+                        <!-- Footer Buttons -->
+                        <div class="flex justify-end gap-2 mt-6">
+                            <button @click="open = false" type="button"
+                                class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100">
+                                Cancel
+                            </button>
+                            <button @click="open = false" type="submit"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                                Save Bookmark
+                            </button>
+                        </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

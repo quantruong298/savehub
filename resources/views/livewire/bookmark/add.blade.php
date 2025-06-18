@@ -1,4 +1,4 @@
-<div class="gap-2">
+{{-- <div class="gap-2">
     <flux:modal.trigger name="add-bookmark">
         <flux:button color="success">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -25,4 +25,4 @@
             </div>
         </form>
     </flux:modal>
-</div>
+</div> --}}
