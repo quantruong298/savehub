@@ -55,54 +55,53 @@
         <nav class="flex items-center space-x-2" aria-label="Pagination">
             {{-- Previous --}}
             @if ($bookmarks->onFirstPage())
-            <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-300 cursor-not-allowed">
-                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                Previous
-            </span>
+                <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-300 cursor-not-allowed">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Previous
+                </span>
             @else
-            <a href="{{ $bookmarks->previousPageUrl() }}" rel="prev"
-                class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
-                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                Previous
-            </a>
+                <button wire:click="previousPage" rel="prev"
+                    class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Previous
+                </button>
             @endif
-    
+
             {{-- Page Numbers --}}
             @for ($page = 1; $page <= $bookmarks->lastPage(); $page++)
                 @if ($page == $bookmarks->currentPage())
-                <span
-                    class="inline-flex items-center px-3 py-1.5 text-sm font-medium border border-gray-300 rounded-md bg-white text-black font-semibold">
-                    {{ $page }}
-                </span>
+                    <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium border border-gray-300 rounded-md bg-white text-black font-semibold">
+                        {{ $page }}
+                    </span>
                 @else
-                <a href="{{ $bookmarks->url($page) }}"
-                    class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md">
-                    {{ $page }}
-                </a>
+                    <button wire:click="gotoPage({{ $page }})"
+                        class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md">
+                        {{ $page }}
+                    </button>
                 @endif
-                @endfor
-    
-                {{-- Next --}}
-                @if ($bookmarks->hasMorePages())
-                <a href="{{ $bookmarks->nextPageUrl() }}" rel="next"
+            @endfor
+
+            {{-- Next --}}
+            @if ($bookmarks->hasMorePages())
+                <button wire:click="nextPage" rel="next"
                     class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
                     Next
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                </a>
-                @else
+                </button>
+            @else
                 <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-300 cursor-not-allowed">
                     Next
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </span>
-                @endif
+            @endif
         </nav>
     </div>
 </div>
