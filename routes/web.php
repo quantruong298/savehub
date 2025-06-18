@@ -12,6 +12,9 @@ Route::get('/login', function () {
     return view('auth.login'); // Trang này chứa <livewire:auth.login-form />
 })->middleware('guest')->name('login');
 
+Route::post('logout', App\Livewire\Actions\Logout::class)
+    ->name('logout');
+
 
 Route::get('/register', function () {
     return view('auth.register');
