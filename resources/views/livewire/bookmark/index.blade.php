@@ -12,10 +12,11 @@
                             {{ $bookmark->title }}
                         </h3>
                     </div>
-                    <svg class="h-5 w-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24">
-                        <path d="M18 13V19H6V13M12 3V15" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                    <a href="{{ $bookmark->url }}" target="_blank" rel="noopener noreferrer" title="Open in new tab">
+                        <svg class="h-5 w-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7m0 0v7m0-7L10 14M5 10v11h11" />
+                        </svg>
+                    </a>
                 </div>
 
                 <!-- URL -->
