@@ -1,4 +1,4 @@
-<div x-data="{ isOpen: false }" wire:ignore>
+<div x-data="{ isOpen: false }">
     <!-- Floating Add Button -->
     <button @click="isOpen = true"
         class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-40">
@@ -24,39 +24,49 @@
             </div>
 
             <!-- Form -->
-            <form class="space-y-4">
+            <form wire:submit.prevent="save" class="space-y-4">
+                <!-- Error Messages -->
+                @if ($errors->any())
+                    <div class="bg-red-50 text-red-500 p-4 rounded-md mb-4">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <!-- Title -->
                 <div>
                     <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                    <input type="text" id="title" placeholder="Enter bookmark title"
+                    <input type="text" id="title" wire:model="title" placeholder="Enter bookmark title"
                         class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <!-- URL -->
                 <div>
                     <label for="url" class="block text-sm font-medium text-gray-700 mb-1">URL</label>
-                    <input type="url" id="url" placeholder="https://example.com"
+                    <input type="url" id="url" wire:model="url" placeholder="https://example.com"
                         class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <!-- Description -->
                 <div>
                     <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                    <textarea id="description" placeholder="Brief description of the bookmark" rows="3"
+                    <textarea id="description" wire:model="description" placeholder="Brief description of the bookmark" rows="3"
                         class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                 </div>
 
                 <!-- Tags -->
                 <div>
                     <label for="tags" class="block text-sm font-medium text-gray-700 mb-1">Tags</label>
-                    <input type="text" id="tags" placeholder="Enter tags separated by commas"
+                    <input type="text" id="tags" wire:model="tags" placeholder="Enter tags separated by commas"
                         class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <!-- Folder -->
                 <div>
                     <label for="folder" class="block text-sm font-medium text-gray-700 mb-1">Folder (Optional)</label>
-                    <select id="folder"
+                    <select id="folder" wire:model="folder"
                         class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="" disabled selected>Select a folder</option>
                         <option value="work">Work</option>
@@ -66,22 +76,22 @@
                         <option value="inspiration">Inspiration</option>
                     </select>
                 </div>
-            </form>
 
-            <!-- Footer Buttons -->
-            <div class="mt-6 flex flex-col sm:flex-row justify-end gap-2">
-                <button @click="isOpen = false"
-                    class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100">
-                    Cancel
-                </button>
-                <button class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                    Save Bookmark
-                </button>
-            </div>
+                <!-- Footer Buttons -->
+                <div class="mt-6 flex flex-col sm:flex-row justify-end gap-2">
+                    <button type="button" @click="isOpen = false"
+                        class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                        Save Bookmark
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
 {{-- <div class="gap-2">
     <flux:modal.trigger name="add-bookmark">
         <flux:button color="success">

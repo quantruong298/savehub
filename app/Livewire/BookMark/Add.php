@@ -11,15 +11,20 @@ class Add extends Component
     public $title;
     public $url;
     public $description;
+    public $tags;
+    public $folder;
 
     protected $rules = [
         'title' => 'required|string|max:255',
         'url' => 'required|url|max:255',
         'description' => 'nullable|string',
+        'tags' => 'nullable|string|max:255', // tags as comma-separated string
+        'folder' => 'nullable|in:work,personal,resources,reading,inspiration',
     ];
 
     public function save()
     {
+        
         $this->validate();
 
         Bookmark::create([
@@ -34,7 +39,7 @@ class Add extends Component
         $this->dispatch('close-modal', name: 'add-bookmark');
         $this->dispatch('bookmark-added');
         // Optionally, you can emit an event to parent to refresh the index
-        $this->redirect(request()->header('Referer') ?? route('client.dashboard'), navigate: true);
+        // $this->redirect(request()->header('Referer') ?? route('dashboard'), navigate: true);
     }
 
     public function render()

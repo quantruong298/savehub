@@ -10,12 +10,12 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <script src="//unpkg.com/alpinejs" defer></script>
+    {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    {{-- @fluxAppearance --}}
+    @livewireStyles
 </head>
 
 <body>
@@ -387,8 +387,9 @@
                 </div>
             </main>
         </div>
-        <livewire:bookmark.add />
+        <livewire:bookmark.add/>
     </div>
+    @livewireScripts
 </body>
 
 </html>
