@@ -35,9 +35,8 @@ class Add extends Component
         ]);
 
         $this->reset(['title', 'url', 'description']);
-        session()->flash('success', 'Bookmark added successfully!');
         $this->dispatch('close-modal', name: 'add-bookmark');
-        $this->dispatch('bookmark-added');
+        $this->dispatch('bookmark-added', message: 'Bookmark added successfully!');
         // Optionally, you can emit an event to parent to refresh the index
         // $this->redirect(request()->header('Referer') ?? route('dashboard'), navigate: true);
     }

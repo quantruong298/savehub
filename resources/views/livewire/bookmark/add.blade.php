@@ -1,4 +1,4 @@
-<div x-data="{ isOpen: false }">
+<div x-data="{ isOpen: false }" @close-modal.window="isOpen = false">
     <!-- Floating Add Button -->
     <button @click="isOpen = true"
         class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-40">
