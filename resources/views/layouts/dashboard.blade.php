@@ -186,33 +186,9 @@
 
                         {{-- View Toggle and Sort Controls --}}
                         <div class="flex justify-between items-center">
-                            <div class="flex items-center space-x-2">
-                                <!-- View Toggle -->
-                                <div class="flex bg-gray-100 rounded-lg p-1">
-                                    <!-- Grid View Button (active) -->
-                                    <button
-                                        class="flex items-center px-3 py-1 rounded-md text-sm bg-white shadow-sm text-gray-700">
-                                        <!-- Grid Icon -->
-                                        <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" stroke-width="2"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z" />
-                                        </svg>
-                                        Grid
-                                    </button>
-
-                                    <!-- List View Button (inactive) -->
-                                    <button class="flex items-center px-3 py-1 rounded-md text-sm text-gray-500">
-                                        <!-- List Icon -->
-                                        <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" stroke-width="2"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M4 6h16M4 12h16M4 18h16" />
-                                        </svg>
-                                        List
-                                    </button>
-                                </div>
-                            </div>
+                            {{-- <div class="flex items-center space-x-2">
+                                <!-- View Toggle will be moved to Index component -->
+                            </div> --}}
                             <!-- Sort Controls with Alpine.js -->
                             <div class="flex items-center space-x-2" x-data="{ open: false, selected: 'Most Recent' }">
                                 <span class="text-sm text-gray-500">Sort by:</span>

@@ -1,4 +1,36 @@
 <div>
+    {{-- View Toggle Controls --}}
+    <div class="flex items-center space-x-2">
+        <div class="mb-6 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <!-- View Toggle -->
+                <div class="flex bg-gray-100 rounded-lg p-1">
+                    <!-- Grid View Button -->
+                    <button wire:click="setViewMode('grid')" class="hover:cursor-pointer flex items-center px-3 py-1 rounded-md text-sm {{ $viewMode === 'grid' ? 'bg-white shadow-sm text-gray-700' : 'text-gray-500' }}">
+                        <!-- Grid Icon -->
+                        <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z" />
+                        </svg>
+                        Grid
+                    </button>
+
+                    <!-- List View Button -->
+                    <button wire:click="setViewMode('list')" class="hover:cursor-pointer flex items-center px-3 py-1 rounded-md text-sm {{ $viewMode === 'list' ? 'bg-white shadow-sm text-gray-700' : 'text-gray-500' }}">
+                        <!-- List Icon -->
+                        <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        List
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Success Message --}}
     @if ($successMessage)
         <div 
             x-data="{ show: true }" 
@@ -21,58 +53,136 @@
             </button>
         </div>
     @endif
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach ($bookmarks as $bookmark)
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
-            <div class="p-6">
-                <!-- Bookmark Header -->
-                <div class="flex items-start justify-between mb-3">
-                    <div class="flex items-center space-x-3 flex-1 min-w-0">
-                        <img src="https://react.dev/favicon.ico" alt="Favicon" class="h-6 w-6 rounded-sm flex-shrink-0"
-                            onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDEzQTUgNSAwIDAgMCAxMCAzQTUgNSAwIDAgMCAxMCAxM1pNMTMuNSAzQTUgNSAwIDAgMCAxMy41IDEzSDEwVjNIMTMuNVoiIGZpbGw9IiNFNUU3RUIiLz4KPC9zdmc+';" />
-                        <h3 class="text-lg font-semibold text-gray-900 truncate">
-                            {{ $bookmark->title }}
-                        </h3>
+    {{-- Bookmarks Display --}}
+    {{-- Grid View --}}
+    @if ($viewMode === 'grid')
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach ($bookmarks as $bookmark)
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                <div class="p-6">
+                    <!-- Bookmark Header -->
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center space-x-3 flex-1 min-w-0">
+                            <img src="https://react.dev/favicon.ico" alt="Favicon" class="h-6 w-6 rounded-sm flex-shrink-0"
+                                onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDEzQTUgNSAwIDAgMCAxMCAzQTUgNSAwIDAgMCAxMCAxM1pNMTMuNSAzQTUgNSAwIDAgMCAxMy41IDEzSDEwVjNIMTMuNVoiIGZpbGw9IiNFNUU3RUIiLz4KPC9zdmc+';" />
+                            <h3 class="text-lg font-semibold text-gray-900 truncate">
+                                {{ $bookmark->title }}
+                            </h3>
+                        </div>
+                        <a href="{{ $bookmark->url }}" target="_blank" rel="noopener noreferrer" title="Open in new tab">
+                            <svg class="h-5 w-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7m0 0v7m0-7L10 14M5 10v11h11" />
+                            </svg>
+                        </a>
                     </div>
-                    <a href="{{ $bookmark->url }}" target="_blank" rel="noopener noreferrer" title="Open in new tab">
-                        <svg class="h-5 w-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7m0 0v7m0-7L10 14M5 10v11h11" />
-                        </svg>
-                    </a>
+
+                    <!-- URL -->
+                    <p class="text-sm text-blue-600 mb-2 truncate">
+                        {{ $bookmark->url }}
+                    </p>
+
+                    <!-- Description -->
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                        {{ $bookmark->description }}
+                    </p>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            React
+                        </span>
+                        <span
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Documentation
+                        </span>
+                        <span
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Frontend
+                        </span>
+                    </div>
+
+                    
+                    <!-- Date and More Button -->
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs text-gray-500">
+                            Saved on {{ $bookmark->created_at }}
+                        </p>
+                        <button class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200" type="button">
+                            <!-- Replace below with your MoreHorizontal SVG icon -->
+                            <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <circle cx="5" cy="12" r="1.5" />
+                                <circle cx="12" cy="12" r="1.5" />
+                                <circle cx="19" cy="12" r="1.5" />
+                            </svg>
+                        </button>
+                    </div>
+      
                 </div>
-
-                <!-- URL -->
-                <p class="text-sm text-blue-600 mb-2 truncate">
-                    {{ $bookmark->url }}
-                </p>
-
-                <!-- Description -->
-                <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {{ $bookmark->description }}
-                </p>
-
-                <!-- Tags -->
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        React
-                    </span>
-                    <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        Documentation
-                    </span>
-                    <span
-                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        Frontend
-                    </span>
-                </div>
-
-                <!-- Date -->
-                <p class="text-xs text-gray-500">Saved on {{ $bookmark->created_at }}</p>
             </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
+    @endif
+
+    {{-- List View --}}
+    @if ($viewMode === 'list')
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            @foreach ($bookmarks as $bookmark)
+            <div class="p-6 border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200 {{ $loop->last ? 'border-b-0' : '' }}">
+                <div class="flex items-start space-x-4">
+                    <img src="https://react.dev/favicon.ico" alt="Favicon"
+                        class="h-8 w-8 rounded-sm flex-shrink-0 mt-1"
+                        onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDEzQTUgNSAwIDAgMCAxMCAzQTUgNSAwIDAgMCAxMCAxM1pNMTMuNSAzQTUgNSAwIDAgMCAxMy41IDEzSDEwVjNIMTMuNVoiIGZpbGw9IiNFNUU3RUIiLz4KPC9zdmc+';" />
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg font-semibold text-gray-900 truncate">
+                                    {{ $bookmark->title }}
+                                </h3>
+                                <p class="text-sm text-blue-600 truncate mb-2">
+                                    {{ $bookmark->url }}
+                                </p>
+                                <p class="text-gray-600 text-sm mb-3">
+                                    {{ $bookmark->description }}
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-2">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        React
+                                    </span>
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Documentation
+                                    </span>
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Frontend
+                                    </span>
+                                </div>
+                                <p class="text-xs text-gray-500">Saved on {{ $bookmark->created_at }}</p>
+                            </div>
+                            <div class="flex items-center space-x-2 ml-4">
+                                <a href="{{ $bookmark->url }}" target="_blank" rel="noopener noreferrer" title="Open in new tab">
+                                    <svg class="h-5 w-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7m0 0v7m0-7L10 14M5 10v11h11" />
+                                    </svg>
+                                </a>
+                                <button class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200" type="button">
+                                    <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <circle cx="5" cy="12" r="1.5" />
+                                        <circle cx="12" cy="12" r="1.5" />
+                                        <circle cx="19" cy="12" r="1.5" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    @endif
+    
     {{-- Pagination --}}
     <div class="mt-8 flex justify-center">
         <nav class="flex items-center space-x-2" aria-label="Pagination">
@@ -128,54 +238,3 @@
         </nav>
     </div>
 </div>
-
-{{-- resources/views/bookmarks/index.blade.php
-<div class="p-6">
-    <div class="flex items-center justify-between mb-4">
-        <h1 class="text-2xl font-bold">Bookmarks</h1>
-        <livewire:bookmark.add />
-        @if (session('success'))
-        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show"
-            class="mb-4 px-4 py-3 rounded bg-green-100 text-green-800 border border-green-300 flex items-center justify-between transition-opacity duration-300"
-            style="min-width:200px;">
-            <span>{{ session('success') }}</span>
-            <button type="button" @click="show = false"
-                class="ml-4 text-green-700 hover:text-green-900 font-bold">&times;</button>
-        </div>
-        @endif
-    </div>
-    <div class="overflow-x-auto bg-white rounded-lg shadow">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">URL</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Created At</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @foreach ($bookmarks as $bookmark)
-                <tr>
-                    <td class="px-4 py-2 text-sm text-gray-700">{{ $bookmark->id }}</td>
-                    <td class="px-4 py-2 text-sm text-gray-900 font-semibold">{{ $bookmark->title }}</td>
-                    <td class="px-4 py-2 text-sm text-blue-600">
-                        <a href="{{ $bookmark->url }}" target="_blank" class="hover:underline">{{ $bookmark->url }}</a>
-                    </td>
-                    <td class="px-4 py-2 text-sm text-gray-700">{{ $bookmark->description }}</td>
-                    <td class="px-4 py-2 text-sm text-gray-500">{{ $bookmark->created_at }}</td>
-                    <td class="px-4 py-2 text-sm">
-                        <livewire:bookmark.edit :bookmark="$bookmark" :key="$bookmark->id" />
-                        <livewire:bookmark.delete :bookmark="$bookmark" :key="$bookmark->id" />
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="mt-4">
-            {{ $bookmarks->links() }}
-        </div>
-    </div>
-</div> --}}

@@ -14,12 +14,18 @@ class Index extends Component
     use WithPagination;
 
     public ?string $successMessage = null;
+    public string $viewMode = 'grid'; // 'grid' or 'list'
 
     #[On('bookmark-added')]
     public function updateList(string $message)
     {
         $this->resetPage();
         $this->successMessage = $message;
+    }
+
+    public function setViewMode(string $mode)
+    {
+        $this->viewMode = $mode;
     }
 
     public function render()
