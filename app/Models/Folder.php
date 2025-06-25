@@ -1,30 +1,26 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bookmark extends Model
+class Folder extends Model
 {
-        use HasFactory;
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'title',
-        'description',
-        'url',
-        'tags',
-        'folder_id',
+        'name',
     ];
 
-    // Define relationship to User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function folder()
+    public function bookmarks()
     {
-        return $this->belongsTo(Folder::class);
+        return $this->hasMany(Bookmark::class);
     }
-}
+} 
