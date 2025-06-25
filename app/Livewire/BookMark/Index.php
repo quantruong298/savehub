@@ -31,6 +31,7 @@ class Index extends Component
     public function render()
     {
         $bookmarks = Bookmark::where('user_id', auth()->id())
+            ->with('tags')
             ->latest()
             ->paginate(6);
         return view('livewire.bookmark.index', [
