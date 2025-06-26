@@ -74,34 +74,34 @@
         </div>
     
         <!-- Form -->
-        <form class="space-y-4 py-4">
+        <form class="space-y-4 py-4" wire:submit.prevent="updateBookmark">
             <!-- Title -->
             <div class="space-y-2">
                 <label for="edit-title" class="text-sm font-medium text-gray-700 block">Title</label>
-                <input id="edit-title" type="text" value="React Documentation"
+                <input id="edit-title" type="text" wire:model.defer="title"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <!-- URL -->
             <div class="space-y-2">
                 <label for="edit-url" class="text-sm font-medium text-gray-700 block">URL</label>
-                <input id="edit-url" type="url" value="https://react.dev"
+                <input id="edit-url" type="url" wire:model.defer="url"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <!-- Description -->
             <div class="space-y-2">
                 <label for="edit-description" class="text-sm font-medium text-gray-700 block">Description</label>
-                <textarea id="edit-description"
+                <textarea id="edit-description" wire:model.defer="description"
                     class="w-full min-h-[80px] border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    rows="3">The official React documentation with guides and API reference</textarea>
+                    rows="3"></textarea>
             </div>
             <!-- Tags -->
             <div class="space-y-2">
                 <label for="edit-tags" class="text-sm font-medium text-gray-700 block">Tags</label>
-                <input id="edit-tags" type="text" value="React, Documentation, Frontend"
+                <input id="edit-tags" type="text" wire:model.defer="tags"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <!-- Folder Dropdown (Alpine.js) -->
-            <div class="space-y-2"
+            {{-- <div class="space-y-2"
                 x-data="{ open: false, selected: null, options: ['Work', 'Personal', 'Resources', 'Reading List', 'Inspiration'] }">
                 <label for="edit-folder" class="text-sm font-medium text-gray-700 block">Folder (Optional)</label>
                 <div class="relative">
@@ -123,20 +123,20 @@
                         </template>
                     </ul>
                 </div>
+            </div> --}}
+
+            <!-- Dialog Footer -->
+            <div class="flex flex-col sm:flex-row gap-2 justify-end mt-6">
+                <button type="button" @click="showEdit = false"
+                    class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-100">
+                    Cancel
+                </button>
+                <button type="submit"
+                    class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
+                    Save Changes
+                </button>
             </div>
         </form>
-    
-        <!-- Dialog Footer -->
-        <div class="flex flex-col sm:flex-row gap-2 justify-end mt-6">
-            <button type="button" @click="showEdit = false"
-                class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-100">
-                Cancel
-            </button>
-            <button type="submit"
-                class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
-                Save Changes
-            </button>
-        </div>
     </div>
 </div>
 
