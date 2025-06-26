@@ -1,8 +1,8 @@
-<!-- Modal Background -->
+<!-- Details/Edit Modal Background -->
 <div x-show="$wire.showModal" x-transition x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/20"
     @keydown.escape.window="$wire.closeModal()">
-    <!-- Modal Content -->
-    <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
+    <!-- Details Content -->
+    {{-- <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
         <!-- Close X -->
         <button @click="$wire.closeModal()" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
             aria-label="Close">&times;</button>
@@ -62,5 +62,81 @@
                 class="px-5 py-2 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition">Delete</button>
         </div>
         @endif
+    </div> --}}
+    <!-- Edit Content -->
+    <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
+        <!-- Dialog Header -->
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold text-gray-900">Edit Bookmark</h2>
+        </div>
+    
+        <!-- Form -->
+        <form class="space-y-4 py-4">
+            <!-- Title -->
+            <div class="space-y-2">
+                <label for="edit-title" class="text-sm font-medium text-gray-700 block">Title</label>
+                <input id="edit-title" type="text" value="React Documentation"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <!-- URL -->
+            <div class="space-y-2">
+                <label for="edit-url" class="text-sm font-medium text-gray-700 block">URL</label>
+                <input id="edit-url" type="url" value="https://react.dev"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <!-- Description -->
+            <div class="space-y-2">
+                <label for="edit-description" class="text-sm font-medium text-gray-700 block">Description</label>
+                <textarea id="edit-description"
+                    class="w-full min-h-[80px] border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="3">The official React documentation with guides and API reference</textarea>
+            </div>
+            <!-- Tags -->
+            <div class="space-y-2">
+                <label for="edit-tags" class="text-sm font-medium text-gray-700 block">Tags</label>
+                <input id="edit-tags" type="text" value="React, Documentation, Frontend"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <!-- Folder Dropdown (Alpine.js) -->
+            <div class="space-y-2"
+                x-data="{ open: false, selected: null, options: ['Work', 'Personal', 'Resources', 'Reading List', 'Inspiration'] }">
+                <label for="edit-folder" class="text-sm font-medium text-gray-700 block">Folder (Optional)</label>
+                <div class="relative">
+                    <button type="button"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        @click="open = !open">
+                        <span x-text="selected ? selected : 'Select a folder' " class="text-gray-400"></span>
+                        <svg class="w-4 h-4 ml-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <ul x-show="open" @click.away="open = false"
+                        class="absolute left-0 z-20 w-full bg-white border border-gray-200 rounded-lg shadow-md mt-2"
+                        style="display: none">
+                        <template x-for="option in options" :key="option">
+                            <li @click="selected = option; open = false"
+                                :class="{'bg-blue-100': selected === option, 'hover:bg-gray-100': true}"
+                                class="px-4 py-2 cursor-pointer" x-text="option"></li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    
+        <!-- Dialog Footer -->
+        <div class="flex flex-col sm:flex-row gap-2 justify-end mt-6">
+            <button type="button" @click="open = false"
+                class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-100">
+                Cancel
+            </button>
+            <button type="submit"
+                class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
+                Save Changes
+            </button>
+        </div>
     </div>
 </div>
+
+
+
+  
