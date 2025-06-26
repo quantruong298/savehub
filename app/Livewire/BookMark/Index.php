@@ -28,6 +28,11 @@ class Index extends Component
         $this->viewMode = $mode;
     }
 
+    public function showDetails($bookmarkId)
+    {
+        $this->dispatch('openBookmarkModal', id: $bookmarkId);
+    }
+
     public function render()
     {
         $bookmarks = Bookmark::where('user_id', auth()->id())

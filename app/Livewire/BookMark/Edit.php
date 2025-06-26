@@ -3,13 +3,15 @@ namespace App\Livewire\BookMark;
 
 use Livewire\Component;
 use App\Models\Bookmark;
+use Livewire\Attributes\On;
 
 class Edit extends Component
 {
-    public $bookmark;
+    public $bookmark = null;
     public $title;
     public $url;
     public $description;
+    public $showModal = false;
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -17,12 +19,24 @@ class Edit extends Component
         'description' => 'nullable|string',
     ];
 
-    public function mount(Bookmark $bookmark)
+    #[On('openBookmarkModal')]
+    public function openModal($id)
     {
-        $this->bookmark = $bookmark;
-        $this->title = $bookmark->title;
-        $this->url = $bookmark->url;
-        $this->description = $bookmark->description;
+        $this->bookmark = Bookmark::with('tags', 'folder')->find($id);
+        
+        if ($this->bookmark) {
+            $this->title = $this->bookmark->title;
+            $this->url = $this->bookmark->url;
+            $this->description = $this->bookmark->description;
+            $this->showModal = true;
+        }
+    }
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->bookmark = null;
+        $this->reset(['title', 'url', 'description']);
     }
 
     public function update()
@@ -36,9 +50,8 @@ class Edit extends Component
         ]);
 
         session()->flash('success', 'Bookmark updated successfully!');
-        $this->dispatch('close-modal', name: 'edit-bookmark-' . $this->bookmark->id);
+        $this->closeModal();
         $this->dispatch('bookmark-updated');
-        $this->redirect(request()->header('Referer') ?? route('client.dashboard'), navigate: true);
     }
 
     public function render()

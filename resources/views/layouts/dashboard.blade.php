@@ -229,6 +229,7 @@
             </main>
         </div>
         <livewire:bookmark.add/>
+        <livewire:bookmark.edit/>
     </div>
     @livewireScripts
 </body>

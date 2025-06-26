@@ -103,7 +103,7 @@
                         <p class="text-xs text-gray-500">
                             Saved on {{ $bookmark->created_at }}
                         </p>
-                        <button class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200" type="button">
+                        <button wire:click="showDetails({{ $bookmark->id }})" class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200" type="button">
                             <!-- Replace below with your MoreHorizontal SVG icon -->
                             <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <circle cx="5" cy="12" r="1.5" />
@@ -157,7 +157,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7m0 0v7m0-7L10 14M5 10v11h11" />
                                     </svg>
                                 </a>
-                                <button class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200" type="button">
+                                <button wire:click="showDetails({{ $bookmark->id }})" class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200" type="button">
                                     <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <circle cx="5" cy="12" r="1.5" />
                                         <circle cx="12" cy="12" r="1.5" />
