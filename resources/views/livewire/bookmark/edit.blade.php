@@ -1,10 +1,10 @@
 <!-- Details/Edit Modal Background -->
-<div x-show="$wire.showModal" x-transition x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/20"
-    @keydown.escape.window="$wire.closeModal()">
+<div x-data="{ showEdit: false }" x-show="$wire.showModal" x-transition x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/20"
+    @keydown.escape.window="$wire.closeModal(); showEdit = false">
     <!-- Details Content -->
-    {{-- <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
+    <div x-show="!showEdit" class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
         <!-- Close X -->
-        <button @click="$wire.closeModal()" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
+        <button @click="$wire.closeModal(); showEdit = false" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
             aria-label="Close">&times;</button>
         
         @if($bookmark)
@@ -54,17 +54,20 @@
         </div>
         <!-- Buttons -->
         <div class="flex justify-end gap-3 pt-10">
-            <button @click="$wire.closeModal()"
+            <button @click="$wire.closeModal(); showEdit = false"
                 class="px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition">Close</button>
-            <button
+            <button @click="showEdit = true"
                 class="px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition">Edit</button>
             <button
                 class="px-5 py-2 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition">Delete</button>
         </div>
         @endif
-    </div> --}}
+    </div>
     <!-- Edit Content -->
-    <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
+    <div x-show="showEdit" class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
+       <!-- Close X -->
+       <button @click="$wire.closeModal(); showEdit = false" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
+       aria-label="Close">&times;</button>
         <!-- Dialog Header -->
         <div class="mb-4">
             <h2 class="text-xl font-semibold text-gray-900">Edit Bookmark</h2>
@@ -125,7 +128,7 @@
     
         <!-- Dialog Footer -->
         <div class="flex flex-col sm:flex-row gap-2 justify-end mt-6">
-            <button type="button" @click="open = false"
+            <button type="button" @click="showEdit = false"
                 class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-100">
                 Cancel
             </button>
