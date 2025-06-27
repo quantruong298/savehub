@@ -73,6 +73,13 @@ class Edit extends Component
         $this->dispatch('bookmark-updated');
     }
 
+    public function confirmDelete()
+    {
+        if ($this->bookmark) {
+            $this->dispatch('confirmDelete', id: $this->bookmark->id);
+        }
+    }
+
     public function render()
     {
         return view('livewire.bookmark.edit');

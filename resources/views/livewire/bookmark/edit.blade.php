@@ -59,6 +59,7 @@
             <button @click="showEdit = true"
                 class="px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition">Edit</button>
             <button
+                wire:click="confirmDelete"
                 class="px-5 py-2 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition">Delete</button>
         </div>
         @endif

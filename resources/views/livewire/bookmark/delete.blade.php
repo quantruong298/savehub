@@ -1,33 +1,25 @@
-<?php
-
-use Livewire\Volt\Component;
-use App\Models\Bookmark;
-
-new class extends Component {
-
-    public $bookmark;
-    
-    public function mount(Bookmark $bookmark)
-    {
-        $this->bookmark = $bookmark;
-    }
-
-    public function delete()
-    {
-        $this->bookmark->delete();
-        $this->dispatch('bookmarkDeleted', ['id' => $this->bookmark->id]);
-        session()->flash('success', 'Bookmark deleted successfully!');
-        $this->redirect(request()->header('Referer') ?? route('client.dashboard'), navigate: true);
-    }
-
-}; ?>
-
-<div>
-    <flux:button color="primary" size="sm" class="gap-1" wire:click="delete">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-2.828 0L9 13zm0 0V17h4" />
-        </svg>
-        Delete
-    </flux:button>
+<!-- Delete Alert Modal -->
+<div x-show="$wire.showConfirmDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+    x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-100"
+    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" style="display: none">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+        <!-- Header -->
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold text-gray-900">Delete Bookmark</h2>
+            <p class="mt-1 text-gray-600">
+                Are you sure you want to delete <span class="font-semibold">"{{ $bookmark?->title ?? '' }}"</span>? This
+                action cannot be undone.
+            </p>
+        </div>
+        <!-- Footer Actions -->
+        <div class="flex justify-end gap-2 mt-6">
+            <button wire:click="closeModal" class="px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-100">
+                Cancel
+            </button>
+            <button wire:click="$wire.delete()" class="px-4 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700">
+                Delete
+            </button>
+        </div>
+    </div>
 </div>

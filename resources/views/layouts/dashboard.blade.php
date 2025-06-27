@@ -230,6 +230,7 @@
         </div>
         <livewire:bookmark.add/>
         <livewire:bookmark.edit/>
+        <livewire:bookmark.delete/>
     </div>
     @livewireScripts
 </body>
