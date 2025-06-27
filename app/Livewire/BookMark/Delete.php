@@ -3,6 +3,7 @@
 namespace App\Livewire\Bookmark;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use App\Models\Bookmark;
 
 class Delete extends Component
 {
@@ -13,7 +14,7 @@ class Delete extends Component
     #[On('confirmDelete')]
     public function openConfirmDeleteModal($id)
     {
-        $this->bookmark = \App\Models\Bookmark::find($id);
+        $this->bookmark = Bookmark::find($id);
         $this->showConfirmDeleteModal = true;
     }
 
@@ -25,7 +26,6 @@ class Delete extends Component
     public function delete()
     {
         $this->bookmark->delete();
-        $this->dispatch('bookmarkDeleted', ['id' => $this->bookmark->id]);
         session()->flash('success', 'Bookmark deleted successfully!');
     }
 

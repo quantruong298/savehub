@@ -17,7 +17,7 @@
             <button wire:click="closeModal" class="px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-100">
                 Cancel
             </button>
-            <button wire:click="$wire.delete()" class="px-4 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700">
+            <button wire:click="delete" class="px-4 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700">
                 Delete
             </button>
         </div>

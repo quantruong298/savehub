@@ -186,9 +186,6 @@
 
                         {{-- View Toggle and Sort Controls --}}
                         <div class="flex justify-between items-center">
-                            {{-- <div class="flex items-center space-x-2">
-                                <!-- View Toggle will be moved to Index component -->
-                            </div> --}}
                             <!-- Sort Controls with Alpine.js -->
                             <div class="flex items-center space-x-2" x-data="{ open: false, selected: 'Most Recent' }">
                                 <span class="text-sm text-gray-500">Sort by:</span>
