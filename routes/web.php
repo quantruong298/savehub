@@ -12,16 +12,21 @@ Route::get('/login', function () {
     return view('auth.login'); // Trang này chứa <livewire:auth.login-form />
 })->middleware('guest')->name('login');
 
+Route::post('logout', App\Livewire\Actions\Logout::class)
+    ->name('logout');
+
 
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', Index::class)->name('dashboard');
+});
 
-
-Route::view('dashboard', 'layouts.dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::view('dashboard', 'layouts.dashboard')
+//     ->middleware(['auth', 'verified'])
+//     ->name('dashboard');
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::redirect('settings', 'settings/profile');

@@ -10,12 +10,12 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <script src="//unpkg.com/alpinejs" defer></script>
+    {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    {{-- @fluxAppearance --}}
+    @livewireStyles
 </head>
 
 <body>
@@ -146,16 +146,18 @@
                                     View Profile
                                 </a>
                                 <hr class="border-gray-200 my-1" />
-                                <a href="/logout"
-                                    class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                                    <!-- Log out icon -->
-                                    <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M17 16l4-4m0 0l-4-4m4 4H7" />
-                                    </svg>
-                                    Logout
-                                </a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 w-full text-left">
+                                        <!-- Log out icon -->
+                                        <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M17 16l4-4m0 0l-4-4m4 4H7" />
+                                        </svg>
+                                        Logout
+                                    </button>
+                                </form>
                             </div>
                         </div>
 
@@ -184,33 +186,6 @@
 
                         {{-- View Toggle and Sort Controls --}}
                         <div class="flex justify-between items-center">
-                            <div class="flex items-center space-x-2">
-                                <!-- View Toggle -->
-                                <div class="flex bg-gray-100 rounded-lg p-1">
-                                    <!-- Grid View Button (active) -->
-                                    <button
-                                        class="flex items-center px-3 py-1 rounded-md text-sm bg-white shadow-sm text-gray-700">
-                                        <!-- Grid Icon -->
-                                        <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" stroke-width="2"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z" />
-                                        </svg>
-                                        Grid
-                                    </button>
-
-                                    <!-- List View Button (inactive) -->
-                                    <button class="flex items-center px-3 py-1 rounded-md text-sm text-gray-500">
-                                        <!-- List Icon -->
-                                        <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" stroke-width="2"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M4 6h16M4 12h16M4 18h16" />
-                                        </svg>
-                                        List
-                                    </button>
-                                </div>
-                            </div>
                             <!-- Sort Controls with Alpine.js -->
                             <div class="flex items-center space-x-2" x-data="{ open: false, selected: 'Most Recent' }">
                                 <span class="text-sm text-gray-500">Sort by:</span>
@@ -246,126 +221,15 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- Bookmarks Display --}}
-                    {{-- Render Bookmark Grid --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div
-                            class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
-                            <div class="p-6">
-                                <!-- Bookmark Header -->
-                                <div class="flex items-start justify-between mb-3">
-                                    <div class="flex items-center space-x-3 flex-1 min-w-0">
-                                        <img src="https://react.dev/favicon.ico" alt="Favicon"
-                                            class="h-6 w-6 rounded-sm flex-shrink-0"
-                                            onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDEzQTUgNSAwIDAgMCAxMCAzQTUgNSAwIDAgMCAxMCAxM1pNMTMuNSAzQTUgNSAwIDAgMCAxMy41IDEzSDEwVjNIMTMuNVoiIGZpbGw9IiNFNUU3RUIiLz4KPC9zdmc+';" />
-                                        <h3 class="text-lg font-semibold text-gray-900 truncate">
-                                            React Documentation
-                                        </h3>
-                                    </div>
-                                    <svg class="h-5 w-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor"
-                                        stroke-width="2" viewBox="0 0 24 24">
-                                        <path d="M18 13V19H6V13M12 3V15" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
-                                </div>
-
-                                <!-- URL -->
-                                <p class="text-sm text-blue-600 mb-2 truncate">
-                                    https://react.dev
-                                </p>
-
-                                <!-- Description -->
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                                    The official React documentation with guides and API reference
-                                </p>
-
-                                <!-- Tags -->
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                        React
-                                    </span>
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                        Documentation
-                                    </span>
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                        Frontend
-                                    </span>
-                                </div>
-
-                                <!-- Date -->
-                                <p class="text-xs text-gray-500">Saved on 2024-01-15</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {{-- Render Bookmark List --}}
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="display: none;">
-                        <div class="p-6 border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
-                            <div class="flex items-start space-x-4">
-                                <img src="https://react.dev/favicon.ico" alt="Favicon"
-                                    class="h-8 w-8 rounded-sm flex-shrink-0 mt-1"
-                                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDEzQTUgNSAwIDAgMCAxMCAzQTUgNSAwIDAgMCAxMCAxM1pNMTMuNSAzQTUgNSAwIDAgMCAxMy41IDEzSDEwVjNIMTMuNVoiIGZpbGw9IiNFNUU3RUIiLz4KPC9zdmc+';" />
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-start justify-between">
-                                        <div class="flex-1 min-w-0">
-                                            <h3 class="text-lg font-semibold text-gray-900 truncate">
-                                                React Documentation
-                                            </h3>
-                                            <p class="text-sm text-blue-600 truncate mb-2">
-                                                https://react.dev
-                                            </p>
-                                            <p class="text-gray-600 text-sm mb-3">
-                                                The official React documentation with guides and API reference
-                                            </p>
-                                            <div class="flex flex-wrap gap-2 mb-2">
-                                                <span
-                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                                    React
-                                                </span>
-                                                <span
-                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                                    Documentation
-                                                </span>
-                                                <span
-                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                                    Frontend
-                                                </span>
-                                            </div>
-                                            <p class="text-xs text-gray-500">Saved on 2024-01-15</p>
-                                        </div>
-                                        <svg class="h-5 w-5 text-gray-400 flex-shrink-0 ml-4" fill="none"
-                                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <path d="M18 13V19H6V13M12 3V15" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {{-- Pagination --}}
-                    <div class="mt-8 flex justify-center">
-                    </div>
+                    {{ $slot }}
                 </div>
             </main>
         </div>
-
-        <!-- Add Bookmark Button (Fixed Position) -->
-        <button
-            class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-40">
-            <!-- Plus icon -->
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-            </svg>
-        </button>
+        <livewire:bookmark.add/>
+        <livewire:bookmark.edit/>
+        <livewire:bookmark.delete/>
     </div>
+    @livewireScripts
 </body>
 
 </html>
