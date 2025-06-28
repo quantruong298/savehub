@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\BookMark;
+namespace App\Livewire\Bookmark;
 
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
