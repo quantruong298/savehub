@@ -183,7 +183,7 @@
             <p class="text-xl mb-8 opacity-90">Join thousands of users who have already transformed their digital life</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a 
-                href="{{ route('login') }}"
+                href="{{ route('register') }}"
                 class="w-full sm:w-auto px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
             >
                 Start Free Today

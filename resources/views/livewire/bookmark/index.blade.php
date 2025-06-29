@@ -63,7 +63,13 @@
                     <!-- Bookmark Header -->
                     <div class="flex items-start justify-between mb-3">
                         <div class="flex items-center space-x-3 flex-1 min-w-0">
-                            <img src="https://react.dev/favicon.ico" alt="Favicon" class="h-6 w-6 rounded-sm flex-shrink-0"
+                            @php
+                                $domain = parse_url($bookmark->url, PHP_URL_HOST);
+                                $faviconUrl = $domain
+                                    ? "https://www.google.com/s2/favicons?domain={$domain}&sz=64"
+                                    : "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDEzQTUgNSAwIDAgMCAxMCAzQTUgNSAwIDAgMCAxMCAxM1pNMTMuNSAzQTUgNSAwIDAgMCAxMy41IDEzSDEwVjNIMTMuNVoiIGZpbGw9IiNFNUU3RUIiLz4KPC9zdmc+";
+                            @endphp
+                            <img src="{{ $faviconUrl }}" alt="Favicon" class="h-6 w-6 rounded-sm flex-shrink-0"
                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDEzQTUgNSAwIDAgMCAxMCAzQTUgNSAwIDAgMCAxMCAxM1pNMTMuNSAzQTUgNSAwIDAgMCAxMy41IDEzSDEwVjNIMTMuNVoiIGZpbGw9IiNFNUU3RUIiLz4KPC9zdmc+';" />
                             <h3 class="text-lg font-semibold text-gray-900 truncate">
                                 {{ $bookmark->title }}
