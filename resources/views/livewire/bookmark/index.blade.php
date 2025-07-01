@@ -59,7 +59,7 @@
         
                     <!-- Description -->
                     <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                        {{ $bookmark->description }}
+                        {{ $bookmark->description ?: '(No Descriptions)' }}
                     </p>
         
                     <!-- Tags -->
@@ -70,7 +70,7 @@
                             {{ $tag->name }}
                         </span>
                         @empty
-                        <span class="text-xs text-gray-400">No tags</span>
+                        <span class="text-xs text-gray-400">(No tags)</span>
                         @endforelse
                     </div>
         

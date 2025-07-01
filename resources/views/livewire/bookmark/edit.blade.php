@@ -30,7 +30,7 @@
             <!-- Description -->
             <div>
                 <div class="text-base font-semibold text-gray-800 mb-1">Description</div>
-                <div class="text-gray-600 text-base">{{ $bookmark->description ?: 'No description provided' }}</div>
+                <div class="text-gray-600 text-base">{{ $bookmark->description ?: '(No Descriptions)' }}</div>
             </div>
             <!-- Tags -->
             <div>
@@ -46,7 +46,7 @@
             <!-- Folder -->
             <div>
                 <div class="text-base font-semibold text-gray-800 mb-1">Folder</div>
-                <div class="text-gray-600 text-base">{{ $bookmark->folder ? $bookmark->folder->name : 'No folder' }}</div>
+                <div class="text-gray-600 text-base">{{ $bookmark->folder ? $bookmark->folder->name : '(No folder)' }}</div>
             </div>
             <!-- Saved Date -->
             <div>
