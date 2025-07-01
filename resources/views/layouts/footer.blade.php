@@ -7,9 +7,11 @@
                     Privacy Policy
                 </a>
             </div>
-            <a href="/" class="text-sm text-gray-500 hover:text-gray-700 underline transition-colors">
-                Back to Home
-            </a>
+            @if(request()->routeIs('login') || request()->routeIs('register'))
+                <a href="/" class="text-sm text-gray-500 hover:text-gray-700 underline transition-colors">
+                    Back to Home
+                </a>
+            @endif
         </div>
     </div>
 </footer>
