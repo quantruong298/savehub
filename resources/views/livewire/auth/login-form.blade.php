@@ -1,12 +1,18 @@
 <form class="space-y-6" wire:submit="login">
     <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2" >Email Address</label>
-        <input type="email" placeholder="Enter your email" wire:model="email"
+        <label class="block text-sm font-medium text-gray-700 mb-2" >
+            Email Address
+            <span class="text-red-600">*</span>
+        </label>
+        <input type="email" placeholder="Enter your email" wire:model="email" required
             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" />
     </div>
     <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-        <input type="password" placeholder="Enter your password" wire:model="password"
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+            Password
+            <span class="text-red-600">*</span>
+        </label>
+        <input type="password" placeholder="Enter your password" wire:model="password" required
             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" />
     </div>
     <button
