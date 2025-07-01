@@ -1,4 +1,14 @@
 <form class="space-y-6" wire:submit="login">
+    <!-- Error Messages -->
+    @if ($errors->any())
+        <div class="bg-red-50 text-red-500 p-4 rounded-md mb-4">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div>
         <label class="block text-sm font-medium text-gray-700 mb-2" >
             Email Address
