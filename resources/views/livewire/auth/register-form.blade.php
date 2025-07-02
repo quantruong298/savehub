@@ -14,7 +14,7 @@
             Full Name
             <span class="text-red-600">*</span>
         </label>
-        <input type="text" placeholder="Enter your full name" wire:model="name" autofocus required
+        <input type="text" placeholder="Enter your full name" wire:model="name" autofocus
             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" />
     </div>
     <div>
@@ -22,7 +22,7 @@
             Email Address
             <span class="text-red-600">*</span>
         </label>
-        <input type="email" placeholder="Enter your email" wire:model="email" required
+        <input type="email" placeholder="Enter your email" wire:model="email"
             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" />
     </div>
     <div>
@@ -30,7 +30,7 @@
             Password
             <span class="text-red-600">*</span>
         </label>
-        <input type="password" placeholder="Create a password" wire:model="password" required
+        <input type="password" placeholder="Create a password" wire:model="password"
             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" />
     </div>
     <div>
@@ -38,7 +38,7 @@
             Confirm Password
             <span class="text-red-600">*</span>
         </label>
-        <input type="password" placeholder="Confirm your password" wire:model="password_confirmation" required
+        <input type="password" placeholder="Confirm your password" wire:model="password_confirmation"
             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all" />
     </div>
     <button type="submit"
