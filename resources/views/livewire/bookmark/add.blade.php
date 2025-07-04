@@ -68,7 +68,7 @@
                     <label for="folder" class="block text-sm font-medium text-gray-700 mb-1">Folder (Optional)</label>
                     <select id="folder" wire:model="folder"
                         class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>Select a folder</option>
+                        <option value="" selected>Select a folder</option>
                         <option value="work">Work</option>
                         <option value="personal">Personal</option>
                         <option value="resources">Resources</option>
@@ -76,6 +76,7 @@
                         <option value="inspiration">Inspiration</option>
                     </select>
                 </div>
+
 
                 <!-- Footer Buttons -->
                 <div class="mt-6 flex flex-col sm:flex-row justify-end gap-2">
