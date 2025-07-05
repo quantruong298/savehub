@@ -43,7 +43,7 @@
                 <!-- Navigation Links -->
                 <nav class="flex-1 px-4 py-4 space-y-1">
                     <!-- All Bookmarks -->
-                    <a href="/dashboard"
+                    <a href="{{ route('dashboard') }}"
                         class="bg-blue-50 border-r-2 border-blue-600 text-blue-700 group flex items-center px-2 py-2 text-sm font-medium rounded-l-md">
                         <!-- Bookmark icon -->
                         <svg class="text-blue-500 mr-3 h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
@@ -54,7 +54,7 @@
                     </a>
 
                     <!-- Folders -->
-                    <a href="/folders"
+                    <a href="{{ route('dashboard.folder') }}"
                         class="text-gray-700 hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                         <!-- Folder icon -->
                         <svg class="text-gray-400 mr-3 h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
