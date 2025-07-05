@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
-use App\Livewire\Bookmark\Index;
+use App\Livewire\Bookmark\Index as BookmarkIndex;
+use App\Livewire\Folder\Index as FolderIndex;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+
+// Auth Routes
 Route::get('/login', function () {
     return view('auth.login'); // Trang này chứa <livewire:auth.login-form />
 })->middleware('guest')->name('login');
@@ -15,14 +18,23 @@ Route::get('/login', function () {
 Route::post('logout', App\Livewire\Actions\Logout::class)
     ->name('logout');
 
-
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
+// Dashboard Routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', Index::class)->name('dashboard');
+    // Bookmark Route
+    Route::get('/dashboard', BookmarkIndex::class)->name('dashboard');
+    // Folder Route
+    Route::get('/dashboard/folder', FolderIndex::class)->name('dashboard.folder');
 });
+
+
+
+
+
+
 
 // Route::view('dashboard', 'layouts.dashboard')
 //     ->middleware(['auth', 'verified'])
