@@ -19,82 +19,50 @@
 </head>
 
 <body>
-    <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center px-4">
-        <div class="max-w-md w-full">
-            <!-- Header -->
-            <div class="text-center mb-8">
-            <a href="/" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6">
-                <!-- ArrowLeft Icon -->
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                </svg>
-                Back to Home
-            </a>
-            <div class="flex justify-center items-center gap-3 mb-4">
-                <div class="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl">
-                <!-- Bookmark Icon -->
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 4v16l6-6 6 6V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2z"/>
-                </svg>
+    <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col">
+        <div class="flex-grow flex items-center justify-center px-4">
+            <div class="max-w-md w-full">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <a href="/" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6">
+                        <!-- ArrowLeft Icon -->
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Back to Home
+                    </a>
+                    <div class="flex justify-center items-center gap-3 mb-4">
+                        <div class="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl">
+                            <!-- Bookmark Icon -->
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M6 4v16l6-6 6 6V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2z" />
+                            </svg>
+                        </div>
+                        <h1 class="text-2xl font-bold text-gray-800">Bookmark Manager</h1>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-700">Create Account</h2>
+                    <p class="text-gray-500">Start organizing your bookmarks today</p>
                 </div>
-                <h1 class="text-2xl font-bold text-gray-800">Bookmark Manager</h1>
-            </div>
-            <h2 class="text-xl font-semibold text-gray-700">Create Account</h2>
-            <p class="text-gray-500">Start organizing your bookmarks today</p>
-            </div>
 
-            <!-- Register Form Placeholder -->
-            <div class="bg-white rounded-2xl shadow-xl p-8">
-            <div class="space-y-6">
-                <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                <input 
-                    type="text" 
-                    placeholder="Enter your full name"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                />
+                <!-- Register Form Placeholder -->
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <livewire:auth.register-form />
+
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600">
+                            Already have an account?
+                            <a href="/login" class="text-blue-600 hover:text-blue-700 font-medium">
+                                Sign in here
+                            </a>
+                        </p>
+                    </div>
                 </div>
-                <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                <input 
-                    type="email" 
-                    placeholder="Enter your email"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                />
-                </div>
-                <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                <input 
-                    type="password" 
-                    placeholder="Create a password"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                />
-                </div>
-                <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-                <input 
-                    type="password" 
-                    placeholder="Confirm your password"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
-                />
-                </div>
-                <button class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl">
-                Create Account
-                </button>
-            </div>
-            
-            <div class="mt-6 text-center">
-                <p class="text-gray-600">
-                Already have an account?
-                <a href="/login" class="text-blue-600 hover:text-blue-700 font-medium">
-                    Sign in here
-                </a>
-                </p>
-            </div>
             </div>
         </div>
+        @include('layouts.footer')
     </div>
-
 </body>
 
 </html>

@@ -9,8 +9,7 @@
             x-transition:leave-start="opacity-100" 
             x-transition:leave-end="opacity-0" 
             class="fixed top-6 right-6 z-50 flex items-center px-5 py-3 bg-green-500 text-white rounded-lg shadow-lg space-x-3"
-            style="min-width: 220px;"
-        >
+            style="min-width: 220px;">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
             </svg>
@@ -23,6 +22,37 @@
         </div>
     @endif
 
+    @if ($bookmarks->isEmpty())
+        <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+            <!-- Icon -->
+            <div class="mb-6">
+                <div class="h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                    <!-- Bookmark SVG icon (Heroicons outline version) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3-7 3V5z" />
+                    </svg>
+                </div>
+            </div>
+        
+            <!-- Message -->
+            <h2 class="text-2xl font-semibold text-gray-900 mb-2">
+                No bookmarks yet
+            </h2>
+        
+            <!-- Description -->
+            <p class="text-gray-600 mb-8 max-w-sm">
+                Start saving your favorite links and organize your digital life.
+            </p>
+        
+            <!-- Button -->
+            <button
+                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl">
+                + Add your first bookmark
+            </button>
+        </div>
+    @else
         {{-- Bookmarks Display --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($bookmarks as $bookmark)
@@ -97,58 +127,59 @@
             @endforeach
         </div>
 
-    {{-- Pagination --}}
-    <div class="mt-8 flex justify-center">
-        <nav class="flex items-center space-x-2" aria-label="Pagination">
-            {{-- Previous --}}
-            @if ($bookmarks->onFirstPage())
-                <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-300 cursor-not-allowed">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    Previous
-                </span>
-            @else
-                <button wire:click="previousPage" rel="prev"
-                    class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    Previous
-                </button>
-            @endif
-
-            {{-- Page Numbers --}}
-            @for ($page = 1; $page <= $bookmarks->lastPage(); $page++)
-                @if ($page == $bookmarks->currentPage())
-                    <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium border border-gray-300 rounded-md bg-white text-black font-semibold">
-                        {{ $page }}
+        {{-- Pagination --}}
+        <div class="mt-8 flex justify-center">
+            <nav class="flex items-center space-x-2" aria-label="Pagination">
+                {{-- Previous --}}
+                @if ($bookmarks->onFirstPage())
+                    <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-300 cursor-not-allowed">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Previous
                     </span>
                 @else
-                    <button wire:click="gotoPage({{ $page }})"
-                        class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md">
-                        {{ $page }}
+                    <button wire:click="previousPage" rel="prev"
+                        class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Previous
                     </button>
                 @endif
-            @endfor
 
-            {{-- Next --}}
-            @if ($bookmarks->hasMorePages())
-                <button wire:click="nextPage" rel="next"
-                    class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
-                    Next
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-            @else
-                <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-300 cursor-not-allowed">
-                    Next
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </span>
-            @endif
-        </nav>
-    </div>
+                {{-- Page Numbers --}}
+                @for ($page = 1; $page <= $bookmarks->lastPage(); $page++)
+                    @if ($page == $bookmarks->currentPage())
+                        <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium border border-gray-300 rounded-md bg-white text-black font-semibold">
+                            {{ $page }}
+                        </span>
+                    @else
+                        <button wire:click="gotoPage({{ $page }})"
+                            class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md">
+                            {{ $page }}
+                        </button>
+                    @endif
+                @endfor
+
+                {{-- Next --}}
+                @if ($bookmarks->hasMorePages())
+                    <button wire:click="nextPage" rel="next"
+                        class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900">
+                        Next
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                @else
+                    <span class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-300 cursor-not-allowed">
+                        Next
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                @endif
+            </nav>
+        </div>
+    @endif
 </div>
