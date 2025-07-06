@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire\BookMark;
+namespace App\Livewire\Bookmark;
 
 use Livewire\Component;
 use App\Models\Bookmark;
