@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
-use App\Livewire\Bookmark\Index as BookmarkIndex;
-use App\Livewire\Folder\Index as FolderIndex;
+use App\Http\Controllers\BookmarkController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,11 +21,9 @@ Route::get('/register', function () {
 })->name('register');
 
 // Dashboard Routes
-Route::middleware(['auth'])->group(function () {
-    // Bookmark Route
-    Route::get('/dashboard', BookmarkIndex::class)->name('dashboard');
-    // Folder Route
-    Route::get('/dashboard/folder', FolderIndex::class)->name('dashboard.folder');
+Route::prefix('dashboard')->middleware(['auth'])->group(function () {
+    Route::get('/', [BookmarkController::class, 'index'])->name('dashboard');
+    Route::get('/folder', [FolderController::class, 'index'])->name('dashboard.folder');
 });
 
 
