@@ -18,7 +18,7 @@
         {{-- View Toggle and Sort Controls --}}
         <div class="flex justify-between items-center">
             {{-- Add Bookmark Component --}}
-            <livewire:bookmark.add/>
+            <livewire:bookmark.create/>
             <!-- Sort Controls with Alpine.js -->
             <div class="flex items-center space-x-2" x-data="{ open: false, selected: 'Most Recent' }">
                 <span class="text-sm text-gray-500">Sort by:</span>
@@ -238,6 +238,6 @@
         </div>
     @endif
     {{-- Edit and Delete Components --}}
-    <livewire:bookmark.edit/>
+    <livewire:bookmark.update/>
     <livewire:bookmark.delete/>
 </div>
