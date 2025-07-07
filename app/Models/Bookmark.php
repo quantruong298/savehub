@@ -14,11 +14,22 @@ class Bookmark extends Model
         'description',
         'url',
         'tags',
+        'folder_id',
     ];
 
     // Define relationship to User
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function folder()
+    {
+        return $this->belongsTo(Folder::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'bookmark_tag');
     }
 }

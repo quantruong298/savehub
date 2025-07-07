@@ -98,7 +98,7 @@
 
         <flux:separator variant="subtle" />
 
-        {{ $slot }} {{-- This is where your Livewire content goes --}}
+        {{-- {{ $slot }} This is where your Livewire content goes --}}
     </flux:main>
 
     @fluxScripts
