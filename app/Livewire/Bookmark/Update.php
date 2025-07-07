@@ -82,6 +82,6 @@ class Update extends Component
 
     public function render()
     {
-        return view('livewire.bookmark.edit');
+        return view('livewire.bookmark.update');
     }
 }
