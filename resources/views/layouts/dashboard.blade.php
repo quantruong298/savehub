@@ -113,11 +113,7 @@
                 <div class="px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between items-center py-4">
 
-                        <div classN="flex items-center">
-                            <h1 class="text-2xl font-semibold text-gray-900">
-                                Bookmarks
-                            </h1>
-                        </div>
+                        <x-page-title />
 
                         <!-- User Dropdown Menu with Alpine.js (proper positioning) -->
                         <div class="flex items-center space-x-3 relative" x-data="{ open: false }">
