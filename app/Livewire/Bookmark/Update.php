@@ -1,12 +1,12 @@
 <?php
-namespace App\Livewire\BookMark;
+namespace App\Livewire\Bookmark;
 
 use Livewire\Component;
 use App\Models\Bookmark;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 
-class Edit extends Component
+class Update extends Component
 {
     public $bookmark = null;
     public $title;
@@ -82,6 +82,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.bookmark.edit');
+        return view('livewire.bookmark.update');
     }
 }
