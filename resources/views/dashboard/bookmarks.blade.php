@@ -57,11 +57,13 @@
             </div>
         </div>
     </div>
-    <h1>This area is for Bookmark Read</h1>
+    {{-- Read Components --}}
+    <livewire:bookmark.read/>
 
-
-    {{-- Edit and Delete Components --}}
+    {{-- Update Components --}}
     <livewire:bookmark.update/>
+
+    {{-- Delete Components --}}
     <livewire:bookmark.delete/>
 </div>
 @endsection
