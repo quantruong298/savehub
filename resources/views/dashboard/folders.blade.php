@@ -57,7 +57,7 @@
         </div>
     </div>
     {{-- Read Components --}}
-    <livewire:bookmark.read/>
+    <livewire:folder.read/>
 
     {{-- Update Components --}}
     <livewire:bookmark.update/>
