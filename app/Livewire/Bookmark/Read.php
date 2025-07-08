@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\BookMark;
+namespace App\Livewire\Bookmark;
 
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
@@ -9,12 +9,11 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 
-class Index extends Component
+class Read extends Component
 {
     use WithPagination;
 
     public ?string $successMessage = null;
-    public string $viewMode = 'grid'; // 'grid' or 'list'
 
     #[On('bookmark-added')]
     public function updateList(string $message)
@@ -22,10 +21,9 @@ class Index extends Component
         $this->resetPage();
         $this->successMessage = $message;
     }
-
-    public function setViewMode(string $mode)
+    public function showDetails($bookmarkId)
     {
-        $this->viewMode = $mode;
+        $this->dispatch('openBookmarkModal', id: $bookmarkId);
     }
 
     public function render()
@@ -34,8 +32,8 @@ class Index extends Component
             ->with('tags')
             ->latest()
             ->paginate(6);
-        return view('livewire.bookmark.index', [
+        return view('livewire.bookmark.read', [
             'bookmarks' => $bookmarks,
-        ])->layout('layouts.dashboard');
+        ]);
     }
 }
