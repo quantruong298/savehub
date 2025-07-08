@@ -14,7 +14,7 @@
                         d="M21 21l-4.35-4.35M16 10a6 6 0 11-12 0 6 6 0 0112 0z" />
                 </svg>
             </div>
-            <input type="text" placeholder="Search bookmarks..."
+            <input type="text" placeholder="Search folders..."
                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none" />
         </div>
 
@@ -45,8 +45,7 @@
                                                         'Oldest',
                                                         'Title (A-Z)',
                                                         'Title (Z-A)',
-                                                        'Website (A-Z)',
-                                                        'Website (Z-A)'
+                                                        'Bookmark Count'
                                                     ]" :key="option">
                             <button @click="selected = option; open = false"
                                 class="w-full text-left px-4 py-2 hover:bg-gray-50"
@@ -58,7 +57,7 @@
         </div>
     </div>
     {{-- Read Components --}}
-    <livewire:bookmark.read/>
+    <livewire:folder.read/>
 
     {{-- Update Components --}}
     <livewire:bookmark.update/>

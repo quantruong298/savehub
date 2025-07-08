@@ -9,7 +9,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 
-class Index extends Component
+class Read extends Component
 {
     use WithPagination;
 
@@ -32,8 +32,8 @@ class Index extends Component
             ->with('tags')
             ->latest()
             ->paginate(6);
-        return view('livewire.bookmark.index', [
+        return view('livewire.bookmark.read', [
             'bookmarks' => $bookmarks,
-        ])->layout('layouts.dashboard');
+        ]);
     }
 }

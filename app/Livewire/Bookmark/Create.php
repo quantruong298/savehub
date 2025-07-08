@@ -43,6 +43,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.bookmark.add');
+        return view('livewire.bookmark.create');
     }
 }

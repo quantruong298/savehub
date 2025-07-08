@@ -42,23 +42,23 @@
 
                 <!-- Navigation Links -->
                 <nav class="flex-1 px-4 py-4 space-y-1">
-                    <!-- All Bookmarks -->
+                    <!-- Bookmarks -->
                     <a href="{{ route('dashboard') }}"
-                        class="bg-blue-50 border-r-2 border-blue-600 text-blue-700 group flex items-center px-2 py-2 text-sm font-medium rounded-l-md">
+                        class="{{ request()->routeIs('dashboard') ? 'bg-blue-50 border-r-2 border-blue-600 text-blue-700' : 'text-gray-700 hover:bg-gray-50' }} group flex items-center px-2 py-2 text-sm font-medium rounded-l-md">
                         <!-- Bookmark icon -->
-                        <svg class="text-blue-500 mr-3 h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
+                        <svg class="{{ request()->routeIs('dashboard') ? 'text-blue-500' : 'text-gray-400' }} mr-3 h-5 w-5" fill="none"
+                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 5v14l7-5 7 5V5H5z" />
                         </svg>
-                        All Bookmarks
+                        Bookmarks
                     </a>
-
+                    
                     <!-- Folders -->
                     <a href="{{ route('dashboard.folder') }}"
-                        class="text-gray-700 hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        class="{{ request()->routeIs('dashboard.folder') ? 'bg-blue-50 border-r-2 border-blue-600 text-blue-700' : 'text-gray-700 hover:bg-gray-50' }} group flex items-center px-2 py-2 text-sm font-medium rounded-l-md">
                         <!-- Folder icon -->
-                        <svg class="text-gray-400 mr-3 h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
+                        <svg class="{{ request()->routeIs('dashboard.folder') ? 'text-blue-500' : 'text-gray-400' }} mr-3 h-5 w-5"
+                            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h4l2 2h10v10H3z" />
                         </svg>
                         Folders
@@ -113,9 +113,7 @@
                 <div class="px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between items-center py-4">
 
-                        <div classN="flex items-center">
-                            <h1 class="text-2xl font-semibold text-gray-900">All Bookmarks</h1>
-                        </div>
+                        <x-page-title />
 
                         <!-- User Dropdown Menu with Alpine.js (proper positioning) -->
                         <div class="flex items-center space-x-3 relative" x-data="{ open: false }">
