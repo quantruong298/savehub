@@ -4,10 +4,10 @@ namespace App\Livewire\Folder;
 
 use Livewire\Component;
 
-class Index extends Component
+class Read extends Component
 {
     public function render()
     {
-        return view('livewire.folder.index')->layout('layouts.dashboard');
+        return view('livewire.folder.read');
     }
 }
