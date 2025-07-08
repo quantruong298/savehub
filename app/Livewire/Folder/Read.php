@@ -12,6 +12,12 @@ class Read extends Component
 {
     use WithPagination;
 
+    #[On('folder-created')]
+    public function updateList()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         $folders = Folder::where('user_id', auth()->id())

@@ -35,7 +35,7 @@ class Create extends Component
         ]);
 
         $this->reset(['title', 'url', 'description']);
-        $this->dispatch('close-modal', name: 'add-bookmark');
+        $this->dispatch('close-modal');
         $this->dispatch('bookmark-added', message: 'Bookmark added successfully!');
         // Optionally, you can emit an event to parent to refresh the index
         // $this->redirect(request()->header('Referer') ?? route('dashboard'), navigate: true);
