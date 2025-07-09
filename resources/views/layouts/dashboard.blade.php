@@ -19,7 +19,6 @@
 </head>
 
 <body>
-    
     <div class="min-h-screen bg-gray-50 flex">
         <!-- Sidebar -->
         <div class="hidden lg:flex lg:w-64 lg:flex-col">
@@ -134,7 +133,7 @@
                             alt="User Avatar" />
                         <div class="flex-1 text-left">
                             <p class="text-base font-semibold text-gray-800">{{ Auth::user()->name }}</p>
-                            <p class="text-sm text-gray-500">{{ Auth::user()->name }}</p>
+                            <p class="text-sm text-gray-500">{{ Auth::user()->email }}</p>
                         </div>
                         <!-- ChevronDown Icon (Heroicons) -->
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -155,18 +154,15 @@
                 </svg>
             </button>
         </div>
-
+        {{-- Toast Messages - Fixed to top right --}}
+        <x-flash-notification/>
         {{-- Main Content --}}
         <div class="flex-1 flex flex-col overflow-hidden">
             {{-- Header --}}
             <header class="bg-white shadow-sm border-b border-gray-200">
                 <div class="px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between items-center py-4">
-
                         <x-page-title />
-
-                        
-
                     </div>
                 </div>
             </header>

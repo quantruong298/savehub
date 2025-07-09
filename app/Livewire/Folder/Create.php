@@ -28,10 +28,7 @@ class Create extends Component
         ]);
         $this->reset(['name']);
         $this->dispatch('close-modal');
-        $this->dispatch('notify', [
-            'message' => 'Created successfully!',
-            'type' => 'success'
-        ]);
+        $this->dispatch('notify', message: 'Folder created successfully!', action: 'create', status: 'success');
     }
 
     public function render()

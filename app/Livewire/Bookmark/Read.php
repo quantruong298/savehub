@@ -13,13 +13,13 @@ class Read extends Component
 {
     use WithPagination;
 
-    public ?string $successMessage = null;
-
-    #[On('bookmark-added')]
-    public function updateList(string $message)
+    #[On('notify')]
+    public function refreshList($action, $status)
     {
-        $this->resetPage();
-        $this->successMessage = $message;
+        if ($action === 'create' && $status === 'success') {
+            // This will trigger a re-render
+            $this->resetPage(); // Optional: reset to first page if paginated
+        }
     }
     public function showDetails($bookmarkId)
     {

@@ -12,10 +12,13 @@ class Read extends Component
 {
     use WithPagination;
 
-    #[On('folder-created')]
-    public function updateList()
+    #[On('notify')]
+    public function refreshList($action, $status)
     {
-        $this->resetPage();
+        if ($action === 'create' && $status === 'success') {
+            // This will trigger a re-render
+            $this->resetPage(); // Optional: reset to first page if paginated
+        }
     }
 
     public function render()
