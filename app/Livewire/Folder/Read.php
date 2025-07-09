@@ -12,6 +12,15 @@ class Read extends Component
 {
     use WithPagination;
 
+    #[On('notify')]
+    public function refreshList($action, $status)
+    {
+        if ($action === 'create' && $status === 'success') {
+            // This will trigger a re-render
+            $this->resetPage(); // Optional: reset to first page if paginated
+        }
+    }
+
     public function render()
     {
         $folders = Folder::where('user_id', auth()->id())
