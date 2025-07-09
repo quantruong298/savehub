@@ -15,6 +15,8 @@ class Create extends Component
         'name' => 'required|string|max:255',
     ];
 
+
+
     public function save()
     {
         
@@ -26,8 +28,10 @@ class Create extends Component
         ]);
         $this->reset(['name']);
         $this->dispatch('close-modal');
-        // Optionally, you can emit an event to parent to refresh the index
-        // $this->redirect(request()->header('Referer') ?? route('dashboard'), navigate: true);
+        $this->dispatch('notify', [
+            'message' => 'Created successfully!',
+            'type' => 'success'
+        ]);
     }
 
     public function render()
