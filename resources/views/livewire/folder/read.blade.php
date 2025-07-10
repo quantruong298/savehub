@@ -37,7 +37,7 @@
                     </button>
                     <!-- Edit and Delete Buttons -->
                     <div class="flex gap-2">
-                        <button type="button"
+                        <button type="button" wire:click="sendRequestToUpdateFolder({{ $folder->id }})"
                             class="flex-1 border border-gray-300 hover:bg-gray-50 flex items-center justify-center px-4 py-2 rounded-lg font-semibold transition-colors">
                             <!-- Edit Icon -->
                             {{-- <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none"
