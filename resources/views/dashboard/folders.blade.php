@@ -60,7 +60,7 @@
     <livewire:folder.read/>
 
     {{-- Update Components --}}
-    <livewire:bookmark.update/>
+    <livewire:folder.update/>
 
     {{-- Delete Components --}}
     <livewire:bookmark.delete/>
