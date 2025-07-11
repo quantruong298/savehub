@@ -63,6 +63,6 @@
     <livewire:folder.update/>
 
     {{-- Delete Components --}}
-    <livewire:bookmark.delete/>
+    <livewire:folder.delete/>
 </div>
 @endsection
