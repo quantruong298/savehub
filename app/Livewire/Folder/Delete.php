@@ -21,13 +21,21 @@ class Delete extends Component
     }
 
     #[On('deleteFolderRequest')]
-    public function openDeleteComfirmation($id)
+    public function openDeleteFolderComfirmation($id)
     {
         $this->folder = Folder::find($id);
         if($this->folder){
             $this->openDeleteModal();
         }
     }
+
+    public function deleteFolder()
+    {
+        $this->folder->delete();
+        $this->closeDeleteModal();
+        $this->dispatch('notify', message: 'Folder deleted successfully!', action: 'delete', status: 'success');
+    }
+
 
     public function render()
     {
