@@ -22,7 +22,7 @@ class Read extends Component
         }
     }
 
-    public function sendRequestCreateFolder()
+    public function sendRequestToCreateFolder()
     {
         $this->dispatch('createFolderRequest');
     }

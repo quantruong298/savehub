@@ -13,7 +13,8 @@ class Update extends Component
     public $url;
     public $description;
     public $tags;
-    public $showModal = false;
+    public $modalVisible = false;
+    public $updateFormVisible = false;
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -22,8 +23,26 @@ class Update extends Component
         'tags' => 'nullable|string',
     ];
 
-    #[On('openBookmarkModal')]
-    public function openModal($id)
+    public function closeUpdateModal(){
+        $this->modalVisible = false;
+        $this->resetValidation();
+        $this->reset();
+    }
+
+    public function openUpdateModal(){
+        $this->modalVisible = true;
+    }
+
+    public function openUpdateForm(){
+        $this->updateFormVisible = true;
+    }
+
+    public function closeUpdateForm(){
+        $this->updateFormVisible = false;
+    }
+
+    #[On('updateBookmarkRequest')]
+    public function openUpdateModalWithDetails($id)
     {
         $this->bookmark = Bookmark::with('tags', 'folder')->find($id);
         
@@ -32,16 +51,10 @@ class Update extends Component
             $this->url = $this->bookmark->url;
             $this->description = $this->bookmark->description;
             $this->tags = $this->bookmark->tags->pluck('name')->implode(', ');
-            $this->showModal = true;
+            $this->openUpdateModal();
         }
     }
 
-    public function closeModal()
-    {
-        $this->showModal = false;
-        $this->bookmark = null;
-        $this->reset(['title', 'url', 'description', 'tags']);
-    }
 
     public function updateBookmark()
     {
@@ -67,17 +80,17 @@ class Update extends Component
             $tagIds[] = $tag->id;
         }
         $this->bookmark->tags()->sync($tagIds);
-
-        session()->flash('success', 'Bookmark updated successfully!');
-        $this->closeModal();
-        $this->dispatch('bookmark-updated');
+        $this->closeUpdateModal();
+        $this->dispatch('notify', message: 'Bookmark updated successfully!', action: 'udpate', status: 'success');
     }
 
-    public function confirmDelete()
-    {
-        if ($this->bookmark) {
-            $this->dispatch('confirmDelete', id: $this->bookmark->id);
-        }
+    public function sendRequestToDeleteBookmark($bookmarkId){
+        $this->dispatch('deleteBookmarkRequest', id: $bookmarkId);
+    }
+
+    #[On('bookmark-deleted')]
+    public function closeModalAfterDelete(){
+        // $this->reset();
     }
 
     public function render()

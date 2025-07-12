@@ -1,10 +1,10 @@
 <!-- Details/Edit Modal Background -->
-<div x-data="{ showEdit: false }" x-show="$wire.showModal" x-transition x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm"
-    @keydown.escape.window="$wire.closeModal(); showEdit = false">
+<div x-data="{ showEdit: false }" x-show="$wire.modalVisible" x-transition x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm"
+    @keydown.escape.window="$wire.closeUpdateModal()">
     <!-- Details Content -->
-    <div x-show="!showEdit" class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
+    <div x-show="!$wire.updateFormVisible" class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
         <!-- Close X -->
-        <button @click="$wire.closeModal(); showEdit = false" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
+        <button wire:click="closeUpdateModal()" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
             aria-label="Close">&times;</button>
         
         @if($bookmark)
@@ -56,20 +56,19 @@
         </div>
         <!-- Buttons -->
         <div class="flex justify-end gap-3 pt-10">
-            <button @click="$wire.closeModal(); showEdit = false"
+            <button wire:click="closeUpdateModal()"
                 class="px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition">Close</button>
-            <button @click="showEdit = true"
-                class="px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition">Edit</button>
-            <button
-                wire:click="confirmDelete"
+            <button wire:click="openUpdateForm()"
+                class="px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition">Update</button>
+            <button wire:click="sendRequestToDeleteBookmark({{ $bookmark->id }})"
                 class="px-5 py-2 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition">Delete</button>
         </div>
         @endif
     </div>
     <!-- Edit Content -->
-    <div x-show="showEdit" class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
+    <div x-show="$wire.updateFormVisible" class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
        <!-- Close X -->
-       <button @click="$wire.closeModal(); showEdit = false" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
+       <button wire:click="closeUpdateModal()" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
        aria-label="Close">&times;</button>
         <!-- Dialog Header -->
         <div class="mb-4">
@@ -78,15 +77,31 @@
     
         <!-- Form -->
         <form class="space-y-4 py-4" wire:submit.prevent="updateBookmark">
+            <!-- Error Messages -->
+            @if ($errors->any())
+            <div class="bg-red-50 text-red-500 p-4 rounded-md mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <!-- Title -->
             <div class="space-y-2">
-                <label for="edit-title" class="text-sm font-medium text-gray-700 block">Title</label>
+                <label for="edit-title" class="text-sm font-medium text-gray-700 block">
+                    Title
+                    <span class="text-red-600">*</span>
+                </label>
                 <input id="edit-title" type="text" wire:model.defer="title"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <!-- URL -->
             <div class="space-y-2">
-                <label for="edit-url" class="text-sm font-medium text-gray-700 block">URL</label>
+                <label for="edit-url" class="text-sm font-medium text-gray-700 block">
+                    URL
+                    <span class="text-red-600">*</span>
+                </label>
                 <input id="edit-url" type="url" wire:model.defer="url"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
@@ -130,7 +145,7 @@
 
             <!-- Dialog Footer -->
             <div class="flex flex-col sm:flex-row gap-2 justify-end mt-6">
-                <button type="button" @click="showEdit = false"
+                <button type="button" wire:click="closeUpdateForm()"
                     class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-100">
                     Cancel
                 </button>

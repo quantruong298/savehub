@@ -135,8 +135,8 @@
                 </p>
 
                 <!-- Description -->
-                <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {{ $bookmark->description ?: '(No Descriptions)' }}
+                <p class="text-sm mb-4 line-clamp-2 {{ $bookmark->description ? 'text-gray-600' : 'text-gray-400 italic' }}">
+                    {{ $bookmark->description ?: '(No Description)' }}
                 </p>
 
                 <!-- Tags -->
@@ -147,7 +147,7 @@
                         {{ $tag->name }}
                     </span>
                     @empty
-                    <span class="text-xs text-gray-400">(No tags)</span>
+                    <span class="text-xs text-gray-400 italic">(No tags)</span>
                     @endforelse
                 </div>
 
@@ -155,9 +155,9 @@
                 <!-- Date and More Button -->
                 <div class="flex items-center justify-between">
                     <p class="text-xs text-gray-500">
-                        Saved on {{ $bookmark->created_at }}
+                        Last updated: {{ $bookmark->updated_at->format('M d, Y') }}
                     </p>
-                    <button wire:click="showDetails({{ $bookmark->id }})"
+                    <button wire:click="sendRequestToUpdateBookmark({{ $bookmark->id }})"
                         class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200" type="button">
                         <!-- Replace below with your MoreHorizontal SVG icon -->
                         <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"

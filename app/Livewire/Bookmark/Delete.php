@@ -9,24 +9,29 @@ class Delete extends Component
 {
 
     public $bookmark;
-    public $showConfirmDeleteModal = false;
+    public $modalVisible = false;
 
-    #[On('confirmDelete')]
-    public function openConfirmDeleteModal($id)
+    public function closeDeleteModal(){
+        $this->modalVisible= false;
+    }
+
+    public function openDeleteModal(){
+        $this->modalVisible = true;
+    }
+
+    #[On('deleteBookmarkRequest')]
+    public function openDeleteConfirmModal($id)
     {
         $this->bookmark = Bookmark::find($id);
-        $this->showConfirmDeleteModal = true;
+        $this->openDeleteModal();
     }
 
-    public function closeModal()
-    {
-        $this->showConfirmDeleteModal = false;
-    }
-
-    public function delete()
+    public function deleteBookmark()
     {
         $this->bookmark->delete();
-        session()->flash('success', 'Bookmark deleted successfully!');
+        // $this->dispatch('bookmark-deleted')->to(Update::class);
+        $this->dispatch('notify', message: 'Bookmark deleted successfully!', action: 'delete', status: 'success');
+        
     }
 
     public function render()

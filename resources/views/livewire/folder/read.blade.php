@@ -22,7 +22,7 @@
         </p>
 
         <!-- Button -->
-        <button wire:click="sendRequestCreateFolder()"
+        <button wire:click="sendRequestToCreateFolder()"
             class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center">
             <!-- Plus Icon SVG -->
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24"
@@ -53,7 +53,7 @@
         <div class="flex justify-between items-center">
             <!-- Add Folder Button -->
             <div class="flex items-center space-x-2"> 
-                <button type="button" wire:click="sendRequestCreateFolder()"
+                <button type="button" wire:click="sendRequestToCreateFolder()"
                     class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-200 flex items-center px-4 py-2 rounded-lg font-semibold">
                     <!-- Plus Icon SVG (Heroicons outline) -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24"

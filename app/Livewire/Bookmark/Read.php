@@ -17,22 +17,19 @@ class Read extends Component
         $this->dispatch('createBookmarkRequest');
     }
 
+    public function sendRequestToUpdateBookmark($bookmarkId){
+        $this->dispatch('updateBookmarkRequest', id: $bookmarkId);
+    }
+
 
     #[On('notify')]
     public function refreshList($action, $status)
     {
-        if ($action === 'create' && $status === 'success') {
+        if ($status === 'success') {
             // This will trigger a re-render
             $this->resetPage(); // Optional: reset to first page if paginated
         }
     }
-
-
-    public function showDetails($bookmarkId)
-    {
-        $this->dispatch('openBookmarkModal', id: $bookmarkId);
-    }
-
 
     public function render()
     {
