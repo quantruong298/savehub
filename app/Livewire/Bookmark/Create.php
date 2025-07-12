@@ -4,6 +4,7 @@ namespace App\Livewire\Bookmark;
 
 use Livewire\Component;
 use App\Models\Bookmark;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 
 class Create extends Component
@@ -13,6 +14,7 @@ class Create extends Component
     public $description;
     public $tags;
     public $folder;
+    public $modalVisible = false;
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -22,7 +24,22 @@ class Create extends Component
         'folder' => 'nullable|in:work,personal,resources,reading,inspiration',
     ];
 
-    public function save()
+    public function closeCreateModal(){
+        $this->resetValidation();
+        $this->modalVisible = false;
+    }
+
+    public function openCreateModal(){
+        $this->modalVisible = true;
+    }
+
+    #[On('createBookmarkRequest')]
+    public function openBookmarkCreateForm()
+    {
+        $this->openCreateModal();
+    }
+
+    public function createBookmark()
     {
         
         $this->validate();
@@ -35,7 +52,8 @@ class Create extends Component
         ]);
 
         $this->reset(['title', 'url', 'description']);
-        $this->dispatch('close-modal');
+        $this->resetValidation();
+        $this->closeCreateModal();
         $this->dispatch('notify', message: 'Bookmark created successfully!', action: 'create', status: 'success');
     }
 

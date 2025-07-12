@@ -24,7 +24,8 @@
         </p>
 
         <!-- Button -->
-        <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center">
+        <button wire:click="sendRequestToCreateBookmark()"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center">
             <!-- Plus Icon SVG -->
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -52,8 +53,18 @@
 
         {{-- Add Button and Sort Controls --}}
         <div class="flex justify-between items-center">
-            {{-- Add Bookmark Component --}}
-            <livewire:bookmark.create/>
+            <!-- Add Bookmark Button -->
+            <div class="flex items-center space-x-2"> 
+                <button type="button" wire:click="sendRequestToCreateBookmark()"
+                    class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-200 flex items-center px-4 py-2 rounded-lg font-semibold">
+                    <!-- Plus Icon SVG (Heroicons outline) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Create Bookmark
+                </button>
+            </div>
             <!-- Sort Controls with Alpine.js -->
             <div class="flex items-center space-x-2" x-data="{ open: false, selected: 'Most Recent' }">
                 <span class="text-sm text-gray-500">Sort by:</span>

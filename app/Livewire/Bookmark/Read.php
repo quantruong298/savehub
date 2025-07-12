@@ -13,6 +13,11 @@ class Read extends Component
 {
     use WithPagination;
 
+    public function sendRequestToCreateBookmark(){
+        $this->dispatch('createBookmarkRequest');
+    }
+
+
     #[On('notify')]
     public function refreshList($action, $status)
     {
@@ -21,10 +26,13 @@ class Read extends Component
             $this->resetPage(); // Optional: reset to first page if paginated
         }
     }
+
+
     public function showDetails($bookmarkId)
     {
         $this->dispatch('openBookmarkModal', id: $bookmarkId);
     }
+
 
     public function render()
     {
