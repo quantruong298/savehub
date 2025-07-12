@@ -9,17 +9,17 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 
-class Index extends Component
+class Read extends Component
 {
     use WithPagination;
 
-    public ?string $successMessage = null;
-
-    #[On('bookmark-added')]
-    public function updateList(string $message)
+    #[On('notify')]
+    public function refreshList($action, $status)
     {
-        $this->resetPage();
-        $this->successMessage = $message;
+        if ($action === 'create' && $status === 'success') {
+            // This will trigger a re-render
+            $this->resetPage(); // Optional: reset to first page if paginated
+        }
     }
     public function showDetails($bookmarkId)
     {
@@ -32,8 +32,8 @@ class Index extends Component
             ->with('tags')
             ->latest()
             ->paginate(6);
-        return view('livewire.bookmark.index', [
+        return view('livewire.bookmark.read', [
             'bookmarks' => $bookmarks,
-        ])->layout('layouts.dashboard');
+        ]);
     }
 }

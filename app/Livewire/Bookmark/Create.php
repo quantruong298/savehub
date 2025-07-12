@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\BookMark;
+namespace App\Livewire\Bookmark;
 
 use Livewire\Component;
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
 
-class Add extends Component
+class Create extends Component
 {
     public $title;
     public $url;
@@ -35,14 +35,12 @@ class Add extends Component
         ]);
 
         $this->reset(['title', 'url', 'description']);
-        $this->dispatch('close-modal', name: 'add-bookmark');
-        $this->dispatch('bookmark-added', message: 'Bookmark added successfully!');
-        // Optionally, you can emit an event to parent to refresh the index
-        // $this->redirect(request()->header('Referer') ?? route('dashboard'), navigate: true);
+        $this->dispatch('close-modal');
+        $this->dispatch('notify', message: 'Bookmark created successfully!', action: 'create', status: 'success');
     }
 
     public function render()
     {
-        return view('livewire.bookmark.add');
+        return view('livewire.bookmark.create');
     }
 }

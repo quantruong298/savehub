@@ -1,11 +1,16 @@
-<div x-data="{ isOpen: false }" @close-modal.window="isOpen = false">
-    <!-- Floating Add Button -->
-    <button @click="isOpen = true"
-        class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-40">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-        </svg>
-    </button>
+<div x-data="{ isOpen: false }" @close-modal.window="isOpen = false" class="flex items-center space-x-2">
+     <!-- Add Bookmark Button -->
+    <div> 
+        <button type="button" @click="isOpen = true"
+            class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-200 flex items-center px-4 py-2 rounded-lg font-semibold">
+            <!-- Plus Icon SVG (Heroicons outline) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Create Bookmark
+        </button>
+    </div>
 
     <!-- Modal Background -->
     <div x-show="isOpen" x-transition
@@ -68,7 +73,7 @@
                     <label for="folder" class="block text-sm font-medium text-gray-700 mb-1">Folder (Optional)</label>
                     <select id="folder" wire:model="folder"
                         class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>Select a folder</option>
+                        <option value="" selected>Select a folder</option>
                         <option value="work">Work</option>
                         <option value="personal">Personal</option>
                         <option value="resources">Resources</option>
@@ -76,6 +81,7 @@
                         <option value="inspiration">Inspiration</option>
                     </select>
                 </div>
+
 
                 <!-- Footer Buttons -->
                 <div class="mt-6 flex flex-col sm:flex-row justify-end gap-2">
