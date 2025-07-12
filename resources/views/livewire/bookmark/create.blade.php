@@ -32,7 +32,7 @@
                     Title
                     <span class="text-red-600">*</span>
                 </label>
-                <input type="text" id="title" wire:model="title" placeholder="Enter bookmark title"
+                <input type="text" id="title" wire:model="title" placeholder="Enter bookmark title" required
                     class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
@@ -42,7 +42,7 @@
                     URL
                     <span class="text-red-600">*</span>
                 </label>
-                <input type="url" id="url" wire:model="url" placeholder="https://example.com"
+                <input type="url" id="url" wire:model="url" placeholder="https://example.com" required
                     class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 

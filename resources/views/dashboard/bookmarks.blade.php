@@ -2,7 +2,7 @@
 
 @section('main-content')
 <div class="px-4 sm:px-6 lg:px-8 py-6">
-    {{-- Add Bookmark Component --}}
+    {{-- Create Bookmark Component --}}
     <livewire:bookmark.create />
 
     {{-- Read Bookmark Component --}}

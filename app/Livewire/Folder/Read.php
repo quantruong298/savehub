@@ -11,6 +11,7 @@ use Livewire\WithPagination;
 class Read extends Component
 {
     use WithPagination;
+    
 
     #[On('notify')]
     public function refreshList($action, $status)
@@ -19,6 +20,11 @@ class Read extends Component
             // This will trigger a re-render
             $this->resetPage(); // Optional: reset to first page if paginated
         }
+    }
+
+    public function sendRequestCreateFolder()
+    {
+        $this->dispatch('createFolderRequest');
     }
 
     public function sendRequestToUpdateFolder($folderId)
