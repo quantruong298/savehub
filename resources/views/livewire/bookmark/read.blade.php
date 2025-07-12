@@ -1,22 +1,4 @@
 <div>
-    {{-- Success Message --}}
-    @if ($successMessage)
-        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2500)" x-show="show"
-            x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="fixed top-6 right-6 z-50 flex items-center px-5 py-3 bg-green-500 text-white rounded-lg shadow-lg space-x-3"
-            style="min-width: 220px;">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            <span class="font-medium">{{ $successMessage }}</span>
-            <button @click="show = false" class="ml-2 focus:outline-none">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-    @endif
     @if ($bookmarks->isEmpty())
     <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
         <!-- Icon -->
@@ -42,12 +24,82 @@
         </p>
 
         <!-- Button -->
-        <button
-            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl">
-            + Add your first bookmark
+        <button wire:click="sendRequestToCreateBookmark()"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center">
+            <!-- Plus Icon SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Add your first bookmark
         </button>
     </div>
     @else
+    {{-- Search and Controls --}}
+    <div class="mb-6 space-y-4">
+        <!-- Search Bar -->
+        <div class="relative max-w-md">
+            <!-- Search Icon -->
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-4.35-4.35M16 10a6 6 0 11-12 0 6 6 0 0112 0z" />
+                </svg>
+            </div>
+            <input type="text" placeholder="Search bookmarks..."
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none" />
+        </div>
+
+        {{-- Add Button and Sort Controls --}}
+        <div class="flex justify-between items-center">
+            <!-- Add Bookmark Button -->
+            <div class="flex items-center space-x-2"> 
+                <button type="button" wire:click="sendRequestToCreateBookmark()"
+                    class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-200 flex items-center px-4 py-2 rounded-lg font-semibold">
+                    <!-- Plus Icon SVG (Heroicons outline) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Create Bookmark
+                </button>
+            </div>
+            <!-- Sort Controls with Alpine.js -->
+            <div class="flex items-center space-x-2" x-data="{ open: false, selected: 'Most Recent' }">
+                <span class="text-sm text-gray-500">Sort by:</span>
+
+                <div class="relative w-[180px]">
+                    <!-- Trigger Button -->
+                    <button @click="open = !open" @click.away="open = false"
+                        class="w-full flex justify-between items-center bg-white border border-gray-300 rounded-md shadow-sm px-3 py-2 text-sm text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        <span x-text="selected"></span>
+                        <svg class="h-4 w-4 text-gray-400 ml-2" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown List -->
+                    <div x-show="open" x-transition
+                        class="absolute mt-2 w-full rounded-md shadow-lg bg-white border border-gray-200 divide-y divide-gray-100 text-sm text-gray-700 z-50">
+                        <template x-for="option in [
+                                                        'Most Recent',
+                                                        'Oldest',
+                                                        'Title (A-Z)',
+                                                        'Title (Z-A)',
+                                                        'Website (A-Z)',
+                                                        'Website (Z-A)'
+                                                    ]" :key="option">
+                            <button @click="selected = option; open = false"
+                                class="w-full text-left px-4 py-2 hover:bg-gray-50"
+                                x-text="option"></button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- Bookmarks Display --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($bookmarks as $bookmark)

@@ -13,18 +13,26 @@ class Read extends Component
 {
     use WithPagination;
 
-    public ?string $successMessage = null;
-
-    #[On('bookmark-added')]
-    public function updateList(string $message)
-    {
-        $this->resetPage();
-        $this->successMessage = $message;
+    public function sendRequestToCreateBookmark(){
+        $this->dispatch('createBookmarkRequest');
     }
+
+
+    #[On('notify')]
+    public function refreshList($action, $status)
+    {
+        if ($action === 'create' && $status === 'success') {
+            // This will trigger a re-render
+            $this->resetPage(); // Optional: reset to first page if paginated
+        }
+    }
+
+
     public function showDetails($bookmarkId)
     {
         $this->dispatch('openBookmarkModal', id: $bookmarkId);
     }
+
 
     public function render()
     {
