@@ -102,10 +102,10 @@
         @foreach ($folders as $folder)
         <div
             class="group hover:shadow-lg transition-all duration-200 border border-gray-200 hover:border-blue-300 rounded-xl overflow-hidden bg-white">
-            <div class="p-6">
+            <div class="p-4">
                 <!-- Folder Icon and Info -->
-                <div class="flex flex-col items-center text-center mb-6">
-                    <div class="mb-4 p-4 bg-blue-50 rounded-full group-hover:bg-blue-100 transition-colors">
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="mb-2 p-4 bg-blue-50 rounded-full group-hover:bg-blue-100 transition-colors">
                         <!-- Folder Icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-600" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
