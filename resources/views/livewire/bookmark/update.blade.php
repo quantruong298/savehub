@@ -1,5 +1,5 @@
 <!-- Details/Edit Modal Background -->
-<div x-data="{ showEdit: false }" x-show="$wire.modalVisible" x-transition x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm"
+<div x-show="$wire.modalVisible" x-transition x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm"
     @keydown.escape.window="$wire.closeUpdateModal()">
     <!-- Details Content -->
     <div x-show="!$wire.updateFormVisible" class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">

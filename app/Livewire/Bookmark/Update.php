@@ -55,7 +55,6 @@ class Update extends Component
         }
     }
 
-
     public function updateBookmark()
     {
         $this->validate();
@@ -85,12 +84,8 @@ class Update extends Component
     }
 
     public function sendRequestToDeleteBookmark($bookmarkId){
+        $this->closeUpdateModal();
         $this->dispatch('deleteBookmarkRequest', id: $bookmarkId);
-    }
-
-    #[On('bookmark-deleted')]
-    public function closeModalAfterDelete(){
-        // $this->reset();
     }
 
     public function render()

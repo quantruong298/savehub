@@ -26,10 +26,15 @@ class Delete extends Component
         $this->openDeleteModal();
     }
 
+    public function cancelDeleteBookmark(){
+        $this->closeDeleteModal();
+        $this->dispatch('updateBookmarkRequest', id: $this->bookmark->id)->to(Update::class);
+    }
+
     public function deleteBookmark()
     {
         $this->bookmark->delete();
-        // $this->dispatch('bookmark-deleted')->to(Update::class);
+        $this->closeDeleteModal();
         $this->dispatch('notify', message: 'Bookmark deleted successfully!', action: 'delete', status: 'success');
         
     }

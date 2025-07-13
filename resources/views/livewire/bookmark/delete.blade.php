@@ -14,7 +14,7 @@
         </div>
         <!-- Footer Actions -->
         <div class="flex justify-end gap-2 mt-6">
-            <button wire:click="closeDeleteModal()" class="px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-100">
+            <button wire:click="cancelDeleteBookmark()" class="px-4 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-100">
                 Cancel
             </button>
             <button wire:click="deleteBookmark()" class="px-4 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700">
