@@ -3,6 +3,7 @@ namespace App\Livewire\Bookmark;
 
 use Livewire\Component;
 use App\Models\Bookmark;
+use App\Models\Tag;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,11 +37,29 @@ class Update extends Component
         }
     }
 
+<<<<<<< Updated upstream
     public function closeModal()
     {
         $this->showModal = false;
         $this->bookmark = null;
         $this->reset(['title', 'url', 'description', 'tags']);
+=======
+    public function handleTagsFieldForUpdate(){
+        // Sync tags
+        $tagNames = collect(explode(',', $this->tags))
+            ->map(fn($tag) => trim($tag))
+            ->filter()
+            ->unique();
+        $tagIds = [];
+        foreach ($tagNames as $tagName) {
+            $tag = Tag::firstOrCreate([
+                'name' => $tagName,
+                'user_id' => Auth::id(),
+            ]);
+            $tagIds[] = $tag->id;
+        }
+        $this->bookmark->tags()->sync($tagIds);
+>>>>>>> Stashed changes
     }
 
     public function updateBookmark()
@@ -53,6 +72,7 @@ class Update extends Component
             'description' => $this->description,
         ]);
 
+<<<<<<< Updated upstream
         // Sync tags
         $tagNames = collect(explode(',', $this->tags))
             ->map(fn($tag) => trim($tag))
@@ -71,6 +91,11 @@ class Update extends Component
         session()->flash('success', 'Bookmark updated successfully!');
         $this->closeModal();
         $this->dispatch('bookmark-updated');
+=======
+        $this->handleTagsFieldForUpdate();
+        $this->closeUpdateModal();
+        $this->dispatch('notify', message: 'Bookmark updated successfully!', action: 'udpate', status: 'success');
+>>>>>>> Stashed changes
     }
 
     public function confirmDelete()
