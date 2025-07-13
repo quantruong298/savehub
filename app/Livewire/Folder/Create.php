@@ -4,20 +4,35 @@ namespace App\Livewire\Folder;
 
 use Livewire\Component;
 use App\Models\Folder;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 
 class Create extends Component
 {
 
     public $name;
+    public $modalVisible = false;
 
     protected $rules = [
         'name' => 'required|string|max:255',
     ];
 
+    public function closeCreateModal(){
+        $this->modalVisible = false;
+        $this->resetValidation();
+    }
 
+    public function openCreateModal(){
+        $this->modalVisible = true;
+    }
 
-    public function save()
+    #[On('createFolderRequest')]
+    public function openFolderCreateForm()
+    {
+        $this->openCreateModal();
+    }
+
+    public function createFolder()
     {
         
         $this->validate();
@@ -26,8 +41,8 @@ class Create extends Component
             'user_id' => Auth::id(),
             'name' => $this->name,
         ]);
-        $this->reset(['name']);
-        $this->dispatch('close-modal');
+        $this->reset();
+        $this->resetValidation();
         $this->dispatch('notify', message: 'Folder created successfully!', action: 'create', status: 'success');
     }
 
