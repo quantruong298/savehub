@@ -5,6 +5,7 @@ namespace App\Livewire\Bookmark;
 use Livewire\Component;
 use App\Models\Bookmark;
 use App\Models\Folder;
+use App\Models\Tag;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +56,23 @@ class Create extends Component
         $this->openCreateModal();
     }
 
+    public function handleTagsFieldForCreate($bookmark){
+        // Sync tags
+        $tagNames = collect(explode(',', $this->tags))
+            ->map(fn($tag) => trim($tag))
+            ->filter()
+            ->unique();
+        $tagIds = [];
+        foreach ($tagNames as $tagName) {
+            $tag = Tag::firstOrCreate([
+                'name' => $tagName,
+                'user_id' => Auth::id(),
+            ]);
+            $tagIds[] = $tag->id;
+        }
+        $bookmark->tags()->sync($tagIds);
+    }
+
     public function createBookmark()
     {
         $this->validate();
@@ -71,9 +89,14 @@ class Create extends Component
             $bookmarkData['folder_id'] = $this->folder_id;
         }
 
-        Bookmark::create($bookmarkData);
+        $bookmark = Bookmark::create($bookmarkData);
+        
+        // Handle tags if provided
+        if ($this->tags) {
+            $this->handleTagsFieldForCreate($bookmark);
+        }
 
-        $this->reset(['title', 'url', 'description', 'folder_id']);
+        $this->reset(['title', 'url', 'description', 'folder_id', 'tags']);
         $this->resetValidation();
         $this->closeCreateModal();
         $this->dispatch('notify', message: 'Bookmark created successfully!', action: 'create', status: 'success');

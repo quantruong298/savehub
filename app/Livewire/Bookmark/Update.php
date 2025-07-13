@@ -3,6 +3,7 @@ namespace App\Livewire\Bookmark;
 
 use Livewire\Component;
 use App\Models\Bookmark;
+use App\Models\Tag;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +56,23 @@ class Update extends Component
         }
     }
 
+    public function handleTagsFieldForUpdate(){
+        // Sync tags
+        $tagNames = collect(explode(',', $this->tags))
+            ->map(fn($tag) => trim($tag))
+            ->filter()
+            ->unique();
+        $tagIds = [];
+        foreach ($tagNames as $tagName) {
+            $tag = Tag::firstOrCreate([
+                'name' => $tagName,
+                'user_id' => Auth::id(),
+            ]);
+            $tagIds[] = $tag->id;
+        }
+        $this->bookmark->tags()->sync($tagIds);
+    }
+
     public function updateBookmark()
     {
         $this->validate();
@@ -65,20 +83,7 @@ class Update extends Component
             'description' => $this->description,
         ]);
 
-        // Sync tags
-        $tagNames = collect(explode(',', $this->tags))
-            ->map(fn($tag) => trim($tag))
-            ->filter()
-            ->unique();
-        $tagIds = [];
-        foreach ($tagNames as $tagName) {
-            $tag = \App\Models\Tag::firstOrCreate([
-                'name' => $tagName,
-                'user_id' => Auth::id(),
-            ]);
-            $tagIds[] = $tag->id;
-        }
-        $this->bookmark->tags()->sync($tagIds);
+        $this->handleTagsFieldForUpdate();
         $this->closeUpdateModal();
         $this->dispatch('notify', message: 'Bookmark updated successfully!', action: 'udpate', status: 'success');
     }
