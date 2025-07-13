@@ -64,15 +64,19 @@
             <!-- Folder -->
             <div>
                 <label for="folder" class="block text-sm font-medium text-gray-700 mb-1">Folder</label>
-                <select id="folder" wire:model="folder"
-                    class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="" selected>Select a folder</option>
-                    <option value="work">Work</option>
-                    <option value="personal">Personal</option>
-                    <option value="resources">Resources</option>
-                    <option value="reading">Reading List</option>
-                    <option value="inspiration">Inspiration</option>
-                </select>
+                @if($folders->count() > 0)
+                    <select id="folder" wire:model="folder_id"
+                        class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select a folder</option>
+                        @foreach($folders as $folder)
+                            <option value="{{ $folder->id }}">{{ $folder->name }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    <div class="text-sm text-gray-500 italic p-3 bg-gray-50 rounded-md border border-gray-200">
+                        You can create folders later to better organize your bookmarks.
+                    </div>
+                @endif
             </div>
 
 
