@@ -4,6 +4,7 @@ namespace App\Livewire\Bookmark;
 use Livewire\Component;
 use App\Models\Bookmark;
 use App\Models\Tag;
+use App\Models\Folder;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,23 +15,40 @@ class Update extends Component
     public $url;
     public $description;
     public $tags;
+    public $folder_id;
     public $modalVisible = false;
     public $updateFormVisible = false;
+    public $folders = [];
 
     protected $rules = [
         'title' => 'required|string|max:255',
         'url' => 'required|url|max:255',
         'description' => 'nullable|string',
         'tags' => 'nullable|string',
+        'folder_id' => 'nullable|exists:folders,id',
     ];
+    
+    public function mount()
+    {
+        $this->loadUserFolders();
+    }
+
+    public function loadUserFolders()
+    {
+        $this->folders = Folder::where('user_id', Auth::id())
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+    }
 
     public function closeUpdateModal(){
+        $this->updateFormVisible = false;
         $this->modalVisible = false;
         $this->resetValidation();
-        $this->reset();
     }
 
     public function openUpdateModal(){
+        $this->loadUserFolders(); 
         $this->modalVisible = true;
     }
 
@@ -52,6 +70,7 @@ class Update extends Component
             $this->url = $this->bookmark->url;
             $this->description = $this->bookmark->description;
             $this->tags = $this->bookmark->tags->pluck('name')->implode(', ');
+            $this->folder_id = $this->bookmark->folder_id;
             $this->openUpdateModal();
         }
     }
@@ -81,6 +100,7 @@ class Update extends Component
             'title' => $this->title,
             'url' => $this->url,
             'description' => $this->description,
+            'folder_id' => $this->folder_id ?: null,
         ]);
 
         $this->handleTagsFieldForUpdate();
