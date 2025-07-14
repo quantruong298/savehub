@@ -31,6 +31,7 @@ class Delete extends Component
 
     public function deleteFolder()
     {
+        $this->folder->bookmarks()->update(['folder_id' => null]);
         $this->folder->delete();
         $this->closeDeleteModal();
         $this->dispatch('notify', message: 'Folder deleted successfully!', action: 'delete', status: 'success');
