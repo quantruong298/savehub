@@ -9,7 +9,7 @@
            <!-- Modal Header -->
            <div class="flex justify-between items-center mb-4">
                <h2 class="text-xl font-semibold text-gray-900">Update Folder</h2>
-               <button wire:click="closeUpdateModal" class="text-gray-400 hover:text-gray-600">
+               <button wire:click="closeUpdateModal()" class="text-gray-400 hover:text-gray-600">
                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                    </svg>
@@ -37,7 +37,7 @@
 
                <!-- Footer Buttons -->
                <div class="mt-6 flex flex-col sm:flex-row justify-end gap-2">
-                   <button type="button" wire:click="closeUpdateModal"
+                   <button type="button" wire:click="closeUpdateModal()"
                        class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100">
                        Cancel
                    </button>
