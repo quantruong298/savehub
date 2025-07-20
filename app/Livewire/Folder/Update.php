@@ -13,12 +13,12 @@ class Update extends Component
     public $name;
     public $modalVisible = false;
 
-
     protected $rules = [
         'name' => 'required|string|max:255',
     ];
 
     public function closeUpdateModal(){
+        $this->reset();
         $this->modalVisible = false;
     }
 
