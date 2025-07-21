@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Read extends Component
 {
-
+    
     public function sendRequestToCloseFolder()
     {
         $this->dispatch('closeFolderRequest');

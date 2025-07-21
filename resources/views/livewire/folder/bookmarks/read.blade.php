@@ -18,10 +18,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3 7a2 2 0 012-2h3.586a1 1 0 01.707.293l1.414 1.414A1 1 0 0012.414 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
                     </svg>
-                    <span class="text-xl font-bold text-gray-800">Work Projects</span>
+                    <span class="text-xl font-bold text-gray-800">Folder Name</span>
                     <span
                         class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-600 ml-1">
-                        8 bookmarks
+                        XXX bookmarks
                     </span>
                 </div>
             </div>
