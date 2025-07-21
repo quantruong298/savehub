@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Folder;
+namespace App\Livewire\Folder\Manage;
 
 use Livewire\Component;
 use App\Models\Folder;
@@ -40,6 +40,6 @@ class Delete extends Component
 
     public function render()
     {
-        return view('livewire.folder.delete');
+        return view('livewire.folder.manage.delete');
     }
 }

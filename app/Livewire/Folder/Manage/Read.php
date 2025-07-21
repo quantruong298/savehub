@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Folder;
+namespace App\Livewire\Folder\Manage;
 
 use Livewire\Component;
 use App\Models\Folder;
@@ -43,7 +43,7 @@ class Read extends Component
             ->withCount('bookmarks')
             ->latest()
             ->paginate(8);
-        return view('livewire.folder.read', [
+        return view('livewire.folder.manage.read', [
             'folders' => $folders,
         ]);
     }
