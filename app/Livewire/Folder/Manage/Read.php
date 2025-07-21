@@ -37,6 +37,11 @@ class Read extends Component
         $this->dispatch('deleteFolderRequest', id: $folderId);
     }
 
+    public function sendRequestToOpenFolder($folderId)
+    {
+        $this->dispatch('openFolderRequest', id: $folderId);
+    }
+
     public function render()
     {
         $folders = Folder::where('user_id', auth()->id())
