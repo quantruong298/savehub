@@ -18,7 +18,7 @@ class Update extends Component
     public $folder_id;
     public $modalVisible = false;
     public $updateFormVisible = false;
-    public $folders = [];
+    public $folders = null;
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -42,9 +42,11 @@ class Update extends Component
     }
 
     public function closeUpdateModal(){
-        $this->updateFormVisible = false;
-        $this->modalVisible = false;
+        // $this->updateFormVisible = false;
+        // $this->modalVisible = false;
+        $this->reset();
         $this->resetValidation();
+        $this->loadUserFolders();
     }
 
     public function openUpdateModal(){
