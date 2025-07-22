@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Folder;
 use Illuminate\Support\Facades\Auth;
 
-class Read extends Component
+class Index extends Component
 {
     public $folderId;
     public $folder = null;
@@ -30,6 +30,6 @@ class Read extends Component
 
     public function render()
     {
-        return view('livewire.folder.bookmarks.read');
+        return view('livewire.folder.bookmarks.index');
     }
 }
