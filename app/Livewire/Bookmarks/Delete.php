@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Bookmark;
+namespace App\Livewire\Bookmarks;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Bookmark;
@@ -41,6 +41,6 @@ class Delete extends Component
 
     public function render()
     {
-        return view('livewire.bookmark.delete');
+        return view('livewire.bookmarks.delete');
     }
 }

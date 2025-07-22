@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire\Bookmark;
+namespace App\Livewire\Bookmarks;
 
 use Livewire\Component;
 use App\Models\Bookmark;
@@ -117,6 +117,6 @@ class Update extends Component
 
     public function render()
     {
-        return view('livewire.bookmark.update');
+        return view('livewire.bookmarks.update');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Bookmark;
+namespace App\Livewire\Bookmarks;
 
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +37,7 @@ class Read extends Component
             ->with('tags')
             ->latest()
             ->paginate(6);
-        return view('livewire.bookmark.read', [
+        return view('livewire.bookmarks.read', [
             'bookmarks' => $bookmarks,
         ]);
     }
