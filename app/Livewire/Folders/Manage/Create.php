@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Folder\Manage;
+namespace App\Livewire\Folders\Manage;
 
 use Livewire\Component;
 use App\Models\Folder;
@@ -48,6 +48,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.folder.manage.create');
+        return view('livewire.folders.manage.create');
     }
 }

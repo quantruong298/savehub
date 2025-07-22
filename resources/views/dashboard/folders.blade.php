@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
 
 @section('main-content')
-    <livewire:folder.index/>
+    <livewire:folders.index/>
 @endsection

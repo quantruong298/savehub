@@ -1,19 +1,19 @@
 <div>
     @if ($bookmarksVisible)
-        <livewire:folder.bookmarks.index :folderId="$folderId"/>
+        <livewire:folders.bookmarks.index :folderId="$folderId"/>
     @else
         <div class="px-4 sm:px-6 lg:px-8 py-6">
             {{-- Create Folder Component --}}
-            <livewire:folder.manage.create/>
+            <livewire:folders.manage.create/>
             
             {{-- Read Folder Components --}}
-            <livewire:folder.manage.read/>
+            <livewire:folders.manage.read/>
         
             {{-- Update Folder Components --}}
-            <livewire:folder.manage.update/>
+            <livewire:folders.manage.update/>
         
             {{-- Delete Folder Components --}}
-            <livewire:folder.manage.delete/>
+            <livewire:folders.manage.delete/>
         </div>
     @endif
 </div>

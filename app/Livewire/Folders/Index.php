@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Folder;
+namespace App\Livewire\Folders;
 
 use Livewire\Component;
 use App\Models\Folder;
@@ -29,6 +29,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.folder.index');
+        return view('livewire.folders.index');
     }
 }

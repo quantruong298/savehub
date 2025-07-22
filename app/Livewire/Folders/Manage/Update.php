@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Folder\Manage;
+namespace App\Livewire\Folders\Manage;
 
 use Livewire\Component;
 use App\Models\Folder;
@@ -52,6 +52,6 @@ class Update extends Component
 
     public function render()
     {
-        return view('livewire.folder.manage.update');
+        return view('livewire.folders.manage.update');
     }
 }

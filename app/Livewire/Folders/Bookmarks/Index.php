@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Folder\Bookmarks;
+namespace App\Livewire\Folders\Bookmarks;
 
 use Livewire\Component;
 use App\Models\Folder;
@@ -30,6 +30,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.folder.bookmarks.index');
+        return view('livewire.folders.bookmarks.index');
     }
 }
