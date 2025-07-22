@@ -8,12 +8,15 @@ use Livewire\Attributes\On;
 
 class Index extends Component
 {   
+
+    public $folderId = null;
     public $bookmarksVisible = false;
 
     #[On('openFolderRequest')]
     public function openFolder($id)
     {
         if(Folder::where('id', $id)->exists()){
+            $this->folderId = $id;
             $this->bookmarksVisible = true;
         }
     }

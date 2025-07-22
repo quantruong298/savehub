@@ -1,6 +1,6 @@
 <div>
     @if ($bookmarksVisible)
-        <livewire:folder.bookmarks.read/>
+        <livewire:folder.bookmarks.read :folderId="$folderId"/>
     @else
         <div class="px-4 sm:px-6 lg:px-8 py-6">
             {{-- Create Folder Component --}}

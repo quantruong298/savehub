@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class Read extends Component
 {
+    public $folderId;
     
     public function sendRequestToCloseFolder()
     {
