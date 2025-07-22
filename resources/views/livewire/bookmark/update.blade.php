@@ -22,7 +22,7 @@
                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDEzQTUgNSAwIDAgMCAxMCAzQTUgNSAwIDAgMCAxMCAxM1pNMTMuNSAzQTUgNSAwIDAgMCAxMy41IDEzSDEwVjNIMTMuNVoiIGZpbGw9IiNFNUU3RUIiLz4KPC9zdmc+'" />
             <div>
                 <div class="text-xl font-semibold text-gray-900">{{ $bookmark->title }}</div>
-                <a href="{{ $bookmark->url }}" class="text-blue-600 text-base hover:underline">{{ $bookmark->url }}</a>
+                <a href="{{ $bookmark->url }}" target="_blank" class="text-blue-600 text-base hover:underline">{{ $bookmark->url }}</a>
             </div>
         </div>
         <!-- Details -->
