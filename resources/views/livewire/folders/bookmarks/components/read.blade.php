@@ -55,14 +55,14 @@
         <div class="flex justify-between items-center">
             <!-- Add Bookmark Button -->
             <div class="flex items-center space-x-2"> 
-                <button type="button" wire:click="sendRequestToCreateBookmark()"
+                <button type="button" wire:click="sendRequestToAddBookmark()"
                     class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-200 flex items-center px-4 py-2 rounded-lg font-semibold">
                     <!-- Plus Icon SVG (Heroicons outline) -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
-                    Add a Bookmark
+                    Add Bookmark
                 </button>
             </div>
             <!-- Sort Controls with Alpine.js -->

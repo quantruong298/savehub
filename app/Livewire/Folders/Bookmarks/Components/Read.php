@@ -14,8 +14,8 @@ class Read extends Component
 
     public $folderId;
     
-    public function sendRequestToCreateBookmark(){
-        $this->dispatch('createBookmarkRequest');
+    public function sendRequestToAddBookmark(){
+        $this->dispatch('addBookmarkRequest');
     }
 
     public function sendRequestToUpdateBookmark($bookmarkId){
