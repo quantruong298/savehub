@@ -157,18 +157,26 @@
                     <p class="text-xs text-gray-500">
                         Last updated: {{ $bookmark->updated_at->format('M d, Y') }}
                     </p>
+                    <div class="flex items-center space-x-1">
+                    <button title="Remove from Folder"
+                        class="p-1 rounded-full hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                        <!-- Minus icon (Heroicons outline) -->
+                        <svg class="h-4 w-4 text-gray-400 hover:text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                        </svg>
+                    </button>
                     <button wire:click="sendRequestToUpdateBookmark({{ $bookmark->id }})"
                         class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200" type="button">
                         <!-- Replace below with your MoreHorizontal SVG icon -->
-                        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
+                        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <circle cx="5" cy="12" r="1.5" />
                             <circle cx="12" cy="12" r="1.5" />
                             <circle cx="19" cy="12" r="1.5" />
                         </svg>
                     </button>
+                    </div>
                 </div>
-
             </div>
         </div>
         @endforeach
