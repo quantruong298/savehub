@@ -20,6 +20,8 @@ class Add extends Component
     public $folderName;
     public $addModalVisible = false;
     public $createNewBookmarkModalVisible = false;
+    public $addExistingBookmarkModalVisible = false;
+    public $bookmarksWithoutFolder = [];
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -33,6 +35,12 @@ class Add extends Component
         $this->folderName = Folder::where('id', $this->folderId)
             ->where('user_id', auth()->id())
             ->value('name');
+    }
+
+    public function getBookmarksWithoutFolder(){
+        $this->bookmarksWithoutFolder = Bookmark::whereNull('folder_id')
+        ->where('user_id', auth()->id())
+        ->get();
     }
 
     #[On('addBookmarkRequest')]
@@ -58,7 +66,22 @@ class Add extends Component
         $this->createNewBookmarkModalVisible = false;
     }
 
+    public function openAddExistingBookmarkModal()
+    {
+        $this->getBookmarksWithoutFolder();
+        $this->addModalVisible = false;
+        $this->addExistingBookmarkModalVisible = true;
+    }
+
+    public function closeAddExistingBookmarkModal()
+    {
+        $this->addModalVisible = true;
+        $this->addExistingBookmarkModalVisible = false;
+    }
+
+
     public function closeAllModals(){
+        $this->addExistingBookmarkModalVisible = false;
         $this->createNewBookmarkModalVisible = false;
         $this->addModalVisible = false;  
     }
