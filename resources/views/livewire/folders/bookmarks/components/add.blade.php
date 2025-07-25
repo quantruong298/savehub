@@ -45,7 +45,7 @@
             </div>
 
             <!-- Form -->
-            <form wire:submit="createBookmark()" class="space-y-4">
+            <form wire:submit="createBookmarkInFolder()" class="space-y-4">
                 <!-- Error Messages -->
                 @if ($errors->any())
                 <div class="bg-red-50 text-red-500 p-4 rounded-md mb-4">

@@ -3,16 +3,30 @@
 namespace App\Livewire\Folders\Bookmarks\Components;
 
 use Livewire\Component;
-use Livewire\Attributes\On;
+use App\Models\Bookmark;
+use App\Models\Tag;
 use App\Models\Folder;
+use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
 
 class Add extends Component
 {
 
+    public $title;
+    public $url;
+    public $description;
+    public $tags;
     public $folderId;
     public $folderName;
     public $addModalVisible = false;
     public $createNewBookmarkModalVisible = false;
+
+    protected $rules = [
+        'title' => 'required|string|max:255',
+        'url' => 'required|url|max:255',
+        'description' => 'nullable|string',
+        'tags' => 'nullable|string|max:255', // tags as comma-separated string
+    ];
 
 
     public function getFolderName(){
@@ -29,7 +43,7 @@ class Add extends Component
 
     public function closeAddModal(){
         $this->addModalVisible = false;
-        $this->reset();
+        // $this->reset();
     }
 
     public function openCreateNewBookmarkModal()
@@ -47,6 +61,47 @@ class Add extends Component
     public function closeAllModals(){
         $this->createNewBookmarkModalVisible = false;
         $this->addModalVisible = false;  
+    }
+
+    public function handleTagsFieldForCreate($bookmark){
+        // Sync tags
+        $tagNames = collect(explode(',', $this->tags))
+            ->map(fn($tag) => trim($tag))
+            ->filter()
+            ->unique();
+        $tagIds = [];
+        foreach ($tagNames as $tagName) {
+            $tag = Tag::firstOrCreate([
+                'name' => $tagName,
+                'user_id' => Auth::id(),
+            ]);
+            $tagIds[] = $tag->id;
+        }
+        $bookmark->tags()->sync($tagIds);
+    }
+
+    public function createBookmarkInFolder()
+    {
+        $this->validate();
+
+        $bookmarkData = [
+            'user_id' => Auth::id(),
+            'title' => $this->title,
+            'url' => $this->url,
+            'description' => $this->description,
+            'folder_id' =>$this->folderId,
+        ];
+        $bookmark = Bookmark::create($bookmarkData);
+        
+        // Handle tags if provided
+        if ($this->tags) {
+            $this->handleTagsFieldForCreate($bookmark);
+        }
+
+        $this->reset(['title', 'url', 'description', 'tags']);
+        $this->resetValidation();
+        $this->closeAllModals();
+        $this->dispatch('notify', message: 'Bookmark created successfully!', action: 'create', status: 'success');
     }
 
     public function render()
