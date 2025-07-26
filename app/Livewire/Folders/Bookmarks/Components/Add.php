@@ -22,6 +22,7 @@ class Add extends Component
     public $createNewBookmarkModalVisible = false;
     public $addExistingBookmarkModalVisible = false;
     public $bookmarksWithoutFolder = [];
+    public $checkedBookmarkIds = [];
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -86,6 +87,17 @@ class Add extends Component
         $this->addModalVisible = false;  
     }
 
+    public function toggleBookmarkSelection($bookmarkId)
+    {
+        if (in_array($bookmarkId, $this->checkedBookmarkIds)) {
+            // Remove ID if already checked
+            $this->checkedBookmarkIds = array_values(array_diff($this->checkedBookmarkIds, [$bookmarkId]));
+        } else {
+            // Add ID if not checked
+            $this->checkedBookmarkIds[] = $bookmarkId;
+        }
+    }
+
     public function handleTagsFieldForCreate($bookmark){
         // Sync tags
         $tagNames = collect(explode(',', $this->tags))
@@ -125,6 +137,23 @@ class Add extends Component
         $this->resetValidation();
         $this->closeAllModals();
         $this->dispatch('notify', message: 'Bookmark created successfully!', action: 'create', status: 'success');
+    }
+
+    public function addExistingBookmarksToFolder(){
+
+        if (empty($this->checkedBookmarkIds)) {
+            $this->dispatch('notify', message: 'Please select at least one bookmark to add!', action: 'add', status: 'warning');
+            return;
+        }
+
+        Bookmark::whereIn('id', $this->checkedBookmarkIds)
+        ->where('user_id', auth()->id())
+        ->update(['folder_id' => $this->folderId]);
+
+        $this->reset(['title', 'url', 'description', 'tags', 'bookmarksWithoutFolder', 'checkedBookmarkIds']);
+        $this->resetValidation();
+        $this->closeAllModals();
+        $this->dispatch('notify', message: 'Bookmarks added successfully!', action: 'add', status: 'success');
     }
 
     public function render()

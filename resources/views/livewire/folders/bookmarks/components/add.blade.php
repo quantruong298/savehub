@@ -134,7 +134,7 @@
             <div class="overflow-y-auto flex-1 px-6 py-4 bg-white">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     @foreach ($bookmarksWithoutFolder as $bookmark)
-                    <div class="p-6 border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
+                    <div class="relative p-6 border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
                         <div class="flex items-start space-x-4">
                             @php
                             $domain = parse_url($bookmark->url, PHP_URL_HOST);
@@ -182,6 +182,12 @@
                                 </div>
                             </div>
                         </div>
+                         <!-- Bottom-right checkbox -->
+                        <div class="absolute bottom-3 right-3">
+                            <input type="checkbox" 
+                                   wire:click="toggleBookmarkSelection({{ $bookmark->id }})"
+                                   class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        </div>
                     </div>
                     @endforeach
                 </div>
@@ -192,7 +198,7 @@
                     class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100">
                     Cancel
                 </button>
-                <button type="submit"
+                <button type="button" wire:click="addExistingBookmarksToFolder()"
                     class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                     Add Bookmarks
                 </button>
