@@ -22,6 +22,9 @@ class Read extends Component
         $this->dispatch('updateBookmarkRequest', id: $bookmarkId);
     }
 
+    public function sendRequestToRemoveBookmark($bookmarkId){
+        $this->dispatch('removeBookmarkRequest', id: $bookmarkId);
+    }
 
     #[On('notify')]
     public function refreshList($action, $status)

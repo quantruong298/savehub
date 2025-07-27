@@ -6,5 +6,8 @@
         
         {{-- Folder/Bookmarks Add Component --}}
         <livewire:folders.bookmarks.components.add :folderId="$folderId"/>
+
+        {{-- Folder/Bookmarks Remove Component --}}
+        <livewire:folders.bookmarks.components.remove :folderId="$folderId"/>
     </div>
 </div>
