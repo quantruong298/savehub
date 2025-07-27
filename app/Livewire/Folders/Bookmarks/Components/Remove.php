@@ -12,7 +12,8 @@ class Remove extends Component
 {
     public $folderId;
     public $folderName;
-    public $bookmark;
+    public $bookmarkId;
+    public $bookmarkTitle;
     public $removeBookmarkModalVisible = false;
 
     public function getFolderName(){
@@ -22,7 +23,10 @@ class Remove extends Component
     }
 
     public function getBookmarkData($bookmarkId){
-        $this->bookmark = Bookmark::find($bookmarkId);
+        $this->bookmarkId = $bookmarkId;
+        $this->bookmarkTitle = Bookmark::where('id', $bookmarkId)
+        ->where('user_id', auth()->id())
+        ->value('title') ?? '';
     }
 
     #[On('removeBookmarkRequest')]
@@ -36,9 +40,22 @@ class Remove extends Component
         $this->removeBookmarkModalVisible = false;
     }
 
-    
+    public function resetProperties(){
+        $this->reset(['folderName', 'bookmarkId', 'bookmarkTitle', 'removeBookmarkModalVisible']);
+    }
+
     public function removeBookmarkFromFolder(){
-        
+        $result = Bookmark::where('id', $this->bookmarkId)
+        ->where('user_id', auth()->id())
+        ->update(['folder_id' => null]);
+
+        if ($result) {
+            $this->resetProperties();
+            $this->dispatch('notify', message: 'Bookmark removed from folder successfully!', action: 'remove', status: 'success');
+        } else {
+            $this->resetProperties();
+            $this->dispatch('notify', message: 'Failed to remove bookmark from folder.', action: 'remove', status: 'fail');
+        }
     }
 
     public function render()
