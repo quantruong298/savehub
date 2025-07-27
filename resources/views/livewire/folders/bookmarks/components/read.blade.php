@@ -24,7 +24,7 @@
         </p>
 
         <!-- Button -->
-        <button wire:click="sendRequestToCreateBookmark()"
+        <button wire:click="sendRequestToAddBookmark()"
             class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center">
             <!-- Plus Icon SVG -->
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24"
@@ -157,18 +157,26 @@
                     <p class="text-xs text-gray-500">
                         Last updated: {{ $bookmark->updated_at->format('M d, Y') }}
                     </p>
+                    <div class="flex items-center space-x-1">
+                    <button title="Remove from Folder"
+                        class="p-1 rounded-full hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                        <!-- X icon (Heroicons outline) -->
+                        <svg class="h-4 w-4 text-gray-400 hover:text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                     <button wire:click="sendRequestToUpdateBookmark({{ $bookmark->id }})"
                         class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200" type="button">
                         <!-- Replace below with your MoreHorizontal SVG icon -->
-                        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
+                        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <circle cx="5" cy="12" r="1.5" />
                             <circle cx="12" cy="12" r="1.5" />
                             <circle cx="19" cy="12" r="1.5" />
                         </svg>
                     </button>
+                    </div>
                 </div>
-
             </div>
         </div>
         @endforeach
