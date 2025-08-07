@@ -65,7 +65,7 @@
                     </a>
 
                     <!-- Tags -->
-                    <a href="/tags"
+                    <a href="{{ route('dashboard.tag') }}"
                         class="text-gray-700 hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                         <!-- Tag icon -->
                         <svg class="text-gray-400 mr-3 h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"

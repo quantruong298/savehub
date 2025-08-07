@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\FolderController;
+use App\Http\Controllers\TagController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +26,7 @@ Route::get('/register', function () {
 Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     Route::get('/', [BookmarkController::class, 'index'])->name('dashboard');
     Route::get('/folder', [FolderController::class, 'index'])->name('dashboard.folder');
+    Route::get('/tag', [TagController::class, 'index'])->name('dashboard.tag');
 });
 
 
