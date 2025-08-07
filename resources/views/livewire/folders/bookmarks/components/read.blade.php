@@ -158,7 +158,7 @@
                         Last updated: {{ $bookmark->updated_at->format('M d, Y') }}
                     </p>
                     <div class="flex items-center space-x-1">
-                    <button title="Remove from Folder"
+                    <button title="Remove from Folder" wire:click="sendRequestToRemoveBookmark({{ $bookmark->id }})"
                         class="p-1 rounded-full hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
                         <!-- X icon (Heroicons outline) -->
                         <svg class="h-4 w-4 text-gray-400 hover:text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"
