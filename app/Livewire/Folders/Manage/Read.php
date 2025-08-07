@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Folder;
+namespace App\Livewire\Folders\Manage;
 
 use Livewire\Component;
 use App\Models\Folder;
@@ -37,13 +37,18 @@ class Read extends Component
         $this->dispatch('deleteFolderRequest', id: $folderId);
     }
 
+    public function sendRequestToOpenFolder($folderId)
+    {
+        $this->dispatch('openFolderRequest', id: $folderId);
+    }
+
     public function render()
     {
         $folders = Folder::where('user_id', auth()->id())
             ->withCount('bookmarks')
             ->latest()
             ->paginate(8);
-        return view('livewire.folder.read', [
+        return view('livewire.folders.manage.read', [
             'folders' => $folders,
         ]);
     }

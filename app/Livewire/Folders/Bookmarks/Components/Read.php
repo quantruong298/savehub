@@ -1,26 +1,30 @@
 <?php
 
-namespace App\Livewire\Bookmark;
+namespace App\Livewire\Folders\Bookmarks\Components;
 
+use Livewire\Component;
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
-use Livewire\Component;
 use Livewire\WithPagination;
-
 
 class Read extends Component
 {
     use WithPagination;
 
-    public function sendRequestToCreateBookmark(){
-        $this->dispatch('createBookmarkRequest');
+    public $folderId;
+    
+    public function sendRequestToAddBookmark(){
+        $this->dispatch('addBookmarkRequest');
     }
 
     public function sendRequestToUpdateBookmark($bookmarkId){
         $this->dispatch('updateBookmarkRequest', id: $bookmarkId);
     }
 
+    public function sendRequestToRemoveBookmark($bookmarkId){
+        $this->dispatch('removeBookmarkRequest', id: $bookmarkId);
+    }
 
     #[On('notify')]
     public function refreshList($action, $status)
@@ -34,10 +38,11 @@ class Read extends Component
     public function render()
     {
         $bookmarks = Bookmark::where('user_id', auth()->id())
+            ->where('folder_id', $this->folderId)
             ->with('tags')
             ->latest()
             ->paginate(6);
-        return view('livewire.bookmark.read', [
+        return view('livewire.folders.bookmarks.components.read', [
             'bookmarks' => $bookmarks,
         ]);
     }

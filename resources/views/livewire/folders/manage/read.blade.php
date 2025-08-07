@@ -124,7 +124,7 @@
                 <!-- Action Buttons -->
                 <div class="space-y-2">
                     <!-- Open Button -->
-                    <button type="button"
+                    <button type="button" wire:click="sendRequestToOpenFolder({{ $folder->id }})"
                         class="w-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center px-4 py-2 rounded-lg font-semibold transition-colors">
                         <!-- FolderOpen Icon -->
                         {{-- <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none"

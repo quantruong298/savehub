@@ -22,7 +22,7 @@
                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDEzQTUgNSAwIDAgMCAxMCAzQTUgNSAwIDAgMCAxMCAxM1pNMTMuNSAzQTUgNSAwIDAgMCAxMy41IDEzSDEwVjNIMTMuNVoiIGZpbGw9IiNFNUU3RUIiLz4KPC9zdmc+'" />
             <div>
                 <div class="text-xl font-semibold text-gray-900">{{ $bookmark->title }}</div>
-                <a href="{{ $bookmark->url }}" class="text-blue-600 text-base hover:underline">{{ $bookmark->url }}</a>
+                <a href="{{ $bookmark->url }}" target="_blank" class="text-blue-600 text-base hover:underline">{{ $bookmark->url }}</a>
             </div>
         </div>
         <!-- Details -->
@@ -66,17 +66,16 @@
         @endif
     </div>
     <!-- Edit Content -->
-    <div x-show="$wire.updateFormVisible" class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-10">
-       <!-- Close X -->
-       <button wire:click="closeUpdateModal()" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
-       aria-label="Close">&times;</button>
+    <div x-show="$wire.updateFormVisible" class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh]  overflow-visible p-10">
+        <!-- Close X -->
+        <button wire:click="closeUpdateModal()" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600" aria-label="Close">&times;</button>
         <!-- Dialog Header -->
         <div class="mb-4">
             <h2 class="text-xl font-semibold text-gray-900">Edit Bookmark</h2>
         </div>
     
         <!-- Form -->
-        <form class="space-y-4 py-4" wire:submit.prevent="updateBookmark">
+        <form class="space-y-4 py-4" wire:submit="updateBookmark()">
             <!-- Error Messages -->
             @if ($errors->any())
             <div class="bg-red-50 text-red-500 p-4 rounded-md mb-4">
@@ -93,7 +92,7 @@
                     Title
                     <span class="text-red-600">*</span>
                 </label>
-                <input id="edit-title" type="text" wire:model.defer="title"
+                <input id="edit-title" type="text" wire:model="title"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <!-- URL -->
@@ -102,46 +101,63 @@
                     URL
                     <span class="text-red-600">*</span>
                 </label>
-                <input id="edit-url" type="url" wire:model.defer="url"
+                <input id="edit-url" type="url" wire:model="url"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <!-- Description -->
             <div class="space-y-2">
-                <label for="edit-description" class="text-sm font-medium text-gray-700 block">Description</label>
-                <textarea id="edit-description" wire:model.defer="description"
+                <label for="edit-description" class="text-sm font-medium text-gray-700 block">Description (Optional)</label>
+                <textarea id="edit-description" wire:model="description"
                     class="w-full min-h-[80px] border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     rows="3"></textarea>
             </div>
             <!-- Tags -->
             <div class="space-y-2">
-                <label for="edit-tags" class="text-sm font-medium text-gray-700 block">Tags</label>
-                <input id="edit-tags" type="text" wire:model.defer="tags"
+                <label for="edit-tags" class="text-sm font-medium text-gray-700 block">Tags (Optional)</label>
+                <input id="edit-tags" type="text" wire:model="tags"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <!-- Folder Dropdown (Alpine.js) -->
             {{-- <div class="space-y-2"
-                x-data="{ open: false, selected: null, options: ['Work', 'Personal', 'Resources', 'Reading List', 'Inspiration'] }">
+                x-data="{ folderMenuVisible: false , selected: null, options: ['Select a folder', 'Work', 'Personal', 'Resources', 'Reading List', 'Inspiration'] }">
                 <label for="edit-folder" class="text-sm font-medium text-gray-700 block">Folder (Optional)</label>
                 <div class="relative">
                     <button type="button"
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        @click="open = !open">
+                        @click="folderMenuVisible = !folderMenuVisible">
                         <span x-text="selected ? selected : 'Select a folder' " class="text-gray-400"></span>
                         <svg class="w-4 h-4 ml-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <ul x-show="open" @click.away="open = false"
+                    <ul x-show="folderMenuVisible" @click.away="folderMenuVisible = false"
                         class="absolute left-0 z-20 w-full bg-white border border-gray-200 rounded-lg shadow-md mt-2"
                         style="display: none">
                         <template x-for="option in options" :key="option">
-                            <li @click="selected = option; open = false"
+                            <li @click="selected = option; folderMenuVisible = false"
                                 :class="{'bg-blue-100': selected === option, 'hover:bg-gray-100': true}"
                                 class="px-4 py-2 cursor-pointer" x-text="option"></li>
                         </template>
                     </ul>
                 </div>
             </div> --}}
+            <!-- Folder -->
+            <div class="space-y-2">
+                <label for="edit-folder" class="text-sm font-medium text-gray-700 block">Folder (Optional)</label>
+                @if($folders->count() > 0)
+                    <select id="edit-folder" wire:model="folder_id"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select a folder</option>
+                        @foreach($folders as $folder)
+                            <option value="{{ $folder->id }}">{{ $folder->name }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    <div class="text-sm text-gray-500 italic p-3 bg-gray-50 rounded-md border border-gray-200">
+                        You can create folders later to better organize your bookmarks.
+                    </div>
+                @endif
+            </div>
 
             <!-- Dialog Footer -->
             <div class="flex flex-col sm:flex-row gap-2 justify-end mt-6">

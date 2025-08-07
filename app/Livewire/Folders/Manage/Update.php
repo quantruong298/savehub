@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Folder;
+namespace App\Livewire\Folders\Manage;
 
 use Livewire\Component;
 use App\Models\Folder;
@@ -13,12 +13,12 @@ class Update extends Component
     public $name;
     public $modalVisible = false;
 
-
     protected $rules = [
         'name' => 'required|string|max:255',
     ];
 
     public function closeUpdateModal(){
+        $this->reset();
         $this->modalVisible = false;
     }
 
@@ -52,6 +52,6 @@ class Update extends Component
 
     public function render()
     {
-        return view('livewire.folder.update');
+        return view('livewire.folders.manage.update');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Bookmark;
+namespace App\Livewire\Bookmarks;
 
 use Livewire\Component;
 use App\Models\Bookmark;
@@ -104,6 +104,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.bookmark.create');
+        return view('livewire.bookmarks.create');
     }
 }

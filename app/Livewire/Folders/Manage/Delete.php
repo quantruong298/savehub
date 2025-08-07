@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Folder;
+namespace App\Livewire\Folders\Manage;
 
 use Livewire\Component;
 use App\Models\Folder;
@@ -31,6 +31,7 @@ class Delete extends Component
 
     public function deleteFolder()
     {
+        $this->folder->bookmarks()->update(['folder_id' => null]);
         $this->folder->delete();
         $this->closeDeleteModal();
         $this->dispatch('notify', message: 'Folder deleted successfully!', action: 'delete', status: 'success');
@@ -39,6 +40,6 @@ class Delete extends Component
 
     public function render()
     {
-        return view('livewire.folder.delete');
+        return view('livewire.folders.manage.delete');
     }
 }
