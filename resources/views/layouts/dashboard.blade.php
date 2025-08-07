@@ -66,10 +66,10 @@
 
                     <!-- Tags -->
                     <a href="{{ route('dashboard.tag') }}"
-                        class="text-gray-700 hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    class="{{ request()->routeIs('dashboard.tag') ? 'bg-blue-50 border-r-2 border-blue-600 text-blue-700' : 'text-gray-700 hover:bg-gray-50' }} group flex items-center px-2 py-2 text-sm font-medium rounded-l-md">
                         <!-- Tag icon -->
-                        <svg class="text-gray-400 mr-3 h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
+                        <svg class="{{ request()->routeIs('dashboard.tag') ? 'text-blue-500' : 'text-gray-400' }} mr-3 h-5 w-5"
+                            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M7 7h.01M3 11l7-7 11 11-7 7L3 11z" />
                         </svg>

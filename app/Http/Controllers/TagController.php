@@ -8,7 +8,6 @@ class TagController extends Controller
 {
     public function index()
     {
-        // return view('dashboard.folders');
-        return ("This is view for tags");
+        return view('dashboard.tags');
     }
 }

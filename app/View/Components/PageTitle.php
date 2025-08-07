@@ -23,7 +23,7 @@ class PageTitle extends Component
         $this->title = match ($routeName) {
             'dashboard' => 'Bookmarks',
             'dashboard.folder' => 'Folders',
-            'dashboard.feature' => 'Features',
+            'dashboard.tag' => 'Tags',
             default => 'Dashboard',
         };
     }
